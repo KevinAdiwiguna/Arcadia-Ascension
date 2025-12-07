@@ -13,28 +13,60 @@ public class ArcadiaAscension {
         int menuSekarang = 1;
 
         while(menuSekarang != 0){
+            cls();
             Banner();
-            System.out.println("            Main Menu");
+            System.out.println("==================================================");
+            System.out.println("                   Main Menu");
             
-            System.out.println("-------------------------");
-            System.out.println((menuSekarang == 1 ? ">> " : "   ") + " Start");
-            System.out.println((menuSekarang == 2 ? ">> " : "   ") + " About");
-            System.out.println((menuSekarang == 3 ? ">> " : "   ") + " Exit");
-            System.out.println("-------------------------");
+            System.out.println("--------------------------------------------------");
+            System.out.println((menuSekarang == 1 ? "                 >> Start <<" : "                    Start  "));
+            System.out.println((menuSekarang == 2 ? "                 >> About <<" : "                    About  "));
+            System.out.println((menuSekarang == 3 ? "                 >> Exit <<" :  "                    Exit  "));
+            System.out.println("--------------------------------------------------");
             System.out.print("Input (1: Up | 2: Down | 3: Pilih): ");
-            menuSekarang = input.nextInt();
+            int pilihan = input.nextInt();
 
-            switch (menuSekarang) {
+            switch (pilihan) {
                 case 1:
+                    if(menuSekarang > 1){
+                        menuSekarang--;
+                    }else{
+                        menuSekarang = 3;
+                    }
                     break;
                 case 2:
+                    if(menuSekarang < 3){
+                        menuSekarang++;
+                    }else{
+                        menuSekarang = 1;
+                    }
                     break;
                 case 3:
-                    menuSekarang = 0;
+                    switch (menuSekarang) {
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            System.out.println("Exiting the game.....");
+                            System.out.println("Goodbye!");
+                            menuSekarang = 0;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    static void cls(){
+        try{
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e){
+            System.out.println(e);
         }
     }
     

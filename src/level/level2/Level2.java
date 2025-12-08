@@ -1,3 +1,4 @@
+package level.level2;
 class Level2 {
     Monster front = null;
     Monster rear = null;

@@ -9,10 +9,11 @@ public class PlayerNode {
 
     private Inventory inventory;
 
-    public PlayerNode(String playerName, int maxHp) {
+    public PlayerNode(String playerName, int maxHp, int damage) {
         this.playerName = playerName;
         this.maxHp = maxHp;
         this.currentHp = maxHp;
+        this.damage = damage;
         this.inventory = new Inventory();
     }
 

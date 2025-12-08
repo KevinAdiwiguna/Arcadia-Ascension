@@ -25,6 +25,7 @@ public class LevelBoss {
             System.out.println("##=============================================================##");
             System.out.println("ADUHAIT BOSS INI KERAS SEKALI! (BELUM SELESAI)");
             int pilihan = input.nextInt();
+            
         }
     }
 }

@@ -3,6 +3,7 @@ package level.level1;
 import java.util.Scanner;
 import utils.ClearScreen;
 import player.PlayerNode;
+import level.BossLevel.LevelBoss; 
 
 public class Level1MemoryGame {
 
@@ -12,10 +13,12 @@ public class Level1MemoryGame {
 
     private final Scanner scanner = new Scanner(System.in);
     private PlayerNode player;
+    private LevelBoss bossLevel;
     private int round = 1;
 
-    public Level1MemoryGame(PlayerNode player) {
+    public Level1MemoryGame(PlayerNode player, LevelBoss bossLevel) {
         this.player = player;
+        this.bossLevel = bossLevel;
     }
 
     public void start() {
@@ -75,14 +78,14 @@ public class Level1MemoryGame {
                 System.out.println("Gerbang batu di belakangnya perlahan terbuka…");
                 System.out.println("\n>>> LEVEL 1 COMPLETED. Menuju ke level selanjutnya");
 
-                for (int i = 0; i < 503; i++) {
+                for (int i = 0; i < 10; i++) {
                     try {
                         Thread.sleep(100);
                     } catch (Exception e) {
                     }
                     System.out.print(".");
                 }
-
+                bossLevel.start();
                 break;
 
             } else {

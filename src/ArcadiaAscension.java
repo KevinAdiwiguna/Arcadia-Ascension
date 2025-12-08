@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import level.level1.Level1MemoryGame;
 import player.PlayerNode;
+import level.BossLevel.LevelBoss;
+import level.BossLevel.NodeBoss;
 
 public class ArcadiaAscension {
     public static void main(String[] args) {
@@ -11,9 +13,11 @@ public class ArcadiaAscension {
 
     static void mainMenu(Scanner input) {
         int menuSekarang = 1;
-        PlayerNode player = new PlayerNode("Gasos", 100);
+        PlayerNode player = new PlayerNode("Gasos", 350, 50);
+        NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
 
-        Level1MemoryGame level1 = new Level1MemoryGame(player);
+        LevelBoss bossLevel = new LevelBoss(player, boss);
+        Level1MemoryGame level1 = new Level1MemoryGame(player, bossLevel);
 
         while (menuSekarang != 0) {
             cls();

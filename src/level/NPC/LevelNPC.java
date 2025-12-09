@@ -1,6 +1,8 @@
 package level.NPC;
 
-import player.PlayerNode;
+import player.*;
+import player.inventory.InventoryNode;
+import level.BossLevel.LevelBoss;
 import utils.ClearScreen;
 import java.util.Scanner;
 
@@ -21,9 +23,17 @@ public class LevelNPC {
         addKalimat("kamu perlu senjata untuk mengalahkannya.");
         addKalimat("saya akan memberikanmu sebuah potion legendaris.");
         addKalimat("kalahkan dia dan dapatkan relik itu!");
+        
+        InventoryNode potionKehidupan = new InventoryNode("potion Kehidupan", 1000);
+        InventoryNode potionHidup = new InventoryNode("potion hidup", 1000);
+        InventoryNode potion1 = new InventoryNode("potion 1", 1000);
+        InventoryNode potion2 = new InventoryNode("potion 2", 1000);
+        InventoryNode potion3 = new InventoryNode("potion 3", 1000);
+        InventoryNode potion4 = new InventoryNode("potion 4", 1000);
 
         NodeKalimat current = first;
         Scanner input = new Scanner(System.in);
+        ClearScreen.clearScreen();
         Banner();
         while(current != null){
             System.out.println("\nNPC: " + current.kalimat);
@@ -31,6 +41,23 @@ public class LevelNPC {
             current = current.next;
             input.nextLine();
         }
+
+        
+        ClearScreen.clearScreen();
+        Banner();
+        System.out.print("Anda mendapakan potion 'kehidupan'.....");
+            input.nextLine();
+        System.out.print("Gunakan potion ini untuk menambah darah anda.");
+            input.nextLine();
+        player.inventory.push(potionKehidupan);
+        player.inventory.push(potionHidup);
+        player.inventory.push(potion1);
+        player.inventory.push(potion2);
+        player.inventory.push(potion3);
+        player.inventory.push(potion4);
+
+        LevelBoss levelBoss = new LevelBoss(player);
+        levelBoss.start();
     }
 
     public void addKalimat(String kalimat){

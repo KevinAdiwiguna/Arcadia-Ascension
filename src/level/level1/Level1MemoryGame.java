@@ -16,9 +16,8 @@ public class Level1MemoryGame {
     private LevelBoss bossLevel;
     private int round = 1;
 
-    public Level1MemoryGame(PlayerNode player, LevelBoss bossLevel) {
+    public Level1MemoryGame(PlayerNode player) {
         this.player = player;
-        this.bossLevel = bossLevel;
     }
 
     public void start() {

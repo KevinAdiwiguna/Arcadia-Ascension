@@ -1,20 +1,23 @@
 package level.BossLevel;
 
 import java.util.Scanner;
-import player.PlayerNode;
+import player.*;
 import utils.ClearScreen;
 
 public class LevelBoss {
     PlayerNode player;
     NodeBoss boss;
     Scanner input = new Scanner(System.in);
+    Scanner inputString = new Scanner(System.in);
 
-    public LevelBoss(PlayerNode player, NodeBoss boss) {
+    public LevelBoss(PlayerNode player) {
         this.player = player;
-        this.boss = boss;
     }
 
     public void start(){
+        
+        NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
+
         ClearScreen.clearScreen();
         System.out.println("##=============================================================##");
         System.out.println("\t\t\t" + boss.nama);
@@ -44,7 +47,21 @@ public class LevelBoss {
                     delay(10, 150);
                     break;
                 case 2:
-                    // Gunakan potion
+                    player.inventory.printInventory();
+                    int count = player.inventory.hitungTotalInventory();
+                    if(count <= 0){
+                        System.out.println("Anda tidak memiliki barang..");
+                    } else{
+                        System.out.print("Potion yang akan anda gunakan: ");//berdasarkan nama potion
+                        String namaPotion = inputString.nextLine();
+                        if(player.inventory.SearchPotion(namaPotion)){
+                            player.inventory.UsePotion(namaPotion);
+                        }else{
+                            System.out.println("Barang tidak ditemukan...");
+                        }
+                        delay(25, 100);
+                    }
+
 
                 default:
                     break;

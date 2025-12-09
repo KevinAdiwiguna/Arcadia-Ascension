@@ -3,8 +3,6 @@ import java.util.Scanner;
 import level.level1.Level1MemoryGame;
 import player.PlayerNode;
 import utils.ClearScreen;
-import level.BossLevel.LevelBoss;
-import level.BossLevel.NodeBoss;
 import level.Map.Graph;
 import level.NPC.LevelNPC;
 
@@ -41,7 +39,7 @@ public class ArcadiaAscension {
         int menuSekarang = 1;
 
         while (menuSekarang != 0) {
-            cls();
+            ClearScreen.clearScreen();
             Banner();
             System.out.println("==================================================");
             System.out.println("                   Main Menu");
@@ -91,14 +89,6 @@ public class ArcadiaAscension {
         }
     }
 
-    static void cls() {
-        try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
     static void StartGame(){
         Scanner input = new Scanner(System.in);
 
@@ -111,10 +101,8 @@ public class ArcadiaAscension {
         System.out.print("Hallo " + playerName);
 
         
-        NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
         PlayerNode player = new PlayerNode(playerName, 250, 75);
-        LevelBoss bossLevel = new LevelBoss(player, boss);
-        Level1MemoryGame level1 = new Level1MemoryGame(player, bossLevel);
+        Level1MemoryGame level1 = new Level1MemoryGame(player);
         LevelNPC npc = new LevelNPC(player);
 
         for (int i = 0; i < 15; i++) {

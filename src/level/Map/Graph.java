@@ -5,7 +5,8 @@ public class Graph {
 
     public void addVertex(int id, String name) { 
         Vertex newVertex = new Vertex(id, name); 
-        if (head == null) {head = newVertex; 
+        if (head == null) {
+            head = newVertex; 
         }else {
             Vertex temp = head; 
             while (temp.next != null) {temp = temp.next;} 
@@ -122,5 +123,5 @@ public class Graph {
             current.visited = false;current.prev = null; 
             current = current.next;
         }
-    } 
+    }
 }

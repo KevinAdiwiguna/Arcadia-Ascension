@@ -43,7 +43,9 @@ public class LevelBoss {
                     player.getDamage(boss.getAttackPower());
                     delay(10, 150);
                     break;
-            
+                case 2:
+                    // Gunakan potion
+
                 default:
                     break;
             }

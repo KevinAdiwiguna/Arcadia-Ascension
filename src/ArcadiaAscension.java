@@ -71,7 +71,7 @@ public class ArcadiaAscension {
                 case 3:
                     switch (menuSekarang) {
                         case 1:
-                            StartGame(input);
+                            StartGame();
                             break;
                         case 2:
                             break;
@@ -98,13 +98,14 @@ public class ArcadiaAscension {
         }
     }
 
-    static void StartGame(Scanner input){
+    static void StartGame(){
+        Scanner input = new Scanner(System.in);
+
         ClearScreen.clearScreen();
         Banner();
         System.out.println("======================================================");
         System.out.println("\t\tWELCOME PLAYER");
         System.out.print("Masukan nama anda: ");
-        String tes = input.nextLine();//buang buffer yang tertahan
         String playerName = input.nextLine();
         System.out.print("Hallo " + playerName);
 
@@ -123,6 +124,10 @@ public class ArcadiaAscension {
         }
         
         bossLevel.start();
+
+    }
+
+    private void About(){
 
     }
 

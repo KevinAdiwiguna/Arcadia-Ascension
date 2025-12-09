@@ -6,6 +6,7 @@ import utils.ClearScreen;
 import level.BossLevel.LevelBoss;
 import level.BossLevel.NodeBoss;
 import level.Map.Graph;
+import level.NPC.LevelNPC;
 
 public class ArcadiaAscension {
     public static void main(String[] args) {
@@ -114,6 +115,7 @@ public class ArcadiaAscension {
         PlayerNode player = new PlayerNode(playerName, 250, 75);
         LevelBoss bossLevel = new LevelBoss(player, boss);
         Level1MemoryGame level1 = new Level1MemoryGame(player, bossLevel);
+        LevelNPC npc = new LevelNPC(player);
 
         for (int i = 0; i < 15; i++) {
             try {
@@ -123,7 +125,7 @@ public class ArcadiaAscension {
             System.out.print(".");
         }
         
-        bossLevel.start();
+        npc.Start();
 
     }
 

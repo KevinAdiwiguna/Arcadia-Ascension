@@ -116,13 +116,13 @@ public class ArcadiaAscension {
 
         for (int i = 0; i < 15; i++) {
             try {
-                Thread.sleep(250);
+                Thread.sleep(150);
             } catch (Exception e) {
             }
             System.out.print(".");
         }
         
-        level1.start();
+        bossLevel.start();
 
     }
 

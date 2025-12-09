@@ -13,7 +13,14 @@ public class NodeBoss {
     }
 
     public int getCurrentHp() { return currentHp;}
-    public int getDamage() { return attackPower;}
+    public int getAttackPower(){return attackPower;}
+
+    public void takeDamage(int damage){
+        currentHp -= damage;
+        if(currentHp <= 0){
+            //yee menang
+        }
+    }
     
     public String displayBoss(){
         String pola = ""

@@ -1,7 +1,7 @@
 package level.level1;
 
 import java.util.Scanner;
-import utils.utils;
+import utils.Utils;
 import player.PlayerNode;
 import player.inventory.InventoryNode;
 import level.BossLevel.LevelBoss;
@@ -14,16 +14,14 @@ public class Level1MemoryGame {
 
     private final Scanner scanner = new Scanner(System.in);
     private PlayerNode player;
-    private LevelBoss bossLevel;
     private int round = 1;
 
-    public Level1MemoryGame(PlayerNode player, LevelBoss bossLevel) {
+    public Level1MemoryGame(PlayerNode player) {
         this.player = player;
-        this.bossLevel = bossLevel;
     }
 
     public void start() {
-        utils.clearScreen();
+        Utils.clearScreen();
         System.out.println("====================================================");
         System.out.println("                LEVEL 1 — TRIAL OF MEMORY          ");
         System.out.println("====================================================");
@@ -34,10 +32,11 @@ public class Level1MemoryGame {
         System.out.println("====================================================\n");
 
         System.out.println("KAMU SIAP BOCAH!!!\n\n");
+        Utils.loadingAnimation();
      
         while (player.getCurrentHp() > 0) {
-
-            System.out.println("----- ROUND " + round + " -----");
+            Utils.clearScreen();
+            System.out.println("\n\n\n\n----- ROUND " + round + " -----");
 
             LinkedListMemoryGame list = new LinkedListMemoryGame();
             list.addRandom(TOTAL_NUMBERS);
@@ -50,7 +49,7 @@ public class Level1MemoryGame {
             } catch (Exception e) {
             }
 
-            utils.clearScreen();
+            Utils.clearScreen();
 
             System.out.println("Cahaya menghilang... semua angka lenyap!");
             System.out.println("Penjaga: \"Sekarang ulangi. Jika salah... jangan salahkan aku.\"");
@@ -105,13 +104,11 @@ public class Level1MemoryGame {
                     return;
                 }
 
-                utils.loadingAnimation();
+                Utils.loadingAnimation();
                 System.out.println("\nBersiap untuk ronde berikutnya...");
                 round++;
 
                 System.out.println("\n");
-
-                utils.clearScreen();
             }
         }
     }

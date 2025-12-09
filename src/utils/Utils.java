@@ -1,6 +1,6 @@
 package utils;
 
-public class utils {
+public class Utils {
     public static void clearScreen() {
         try {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {

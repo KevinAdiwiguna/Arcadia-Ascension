@@ -2,10 +2,12 @@ import java.util.Scanner;
 
 import level.level1.Level1MemoryGame;
 import player.PlayerNode;
-import utils.utils;
+import utils.Utils;
+import utils.Display;
 import level.BossLevel.LevelBoss;
 import level.BossLevel.NodeBoss;
 import level.Map.Graph;
+import level.NPC.LevelNPC;
 
 public class ArcadiaAscension {
     public static void main(String[] args) {
@@ -41,7 +43,7 @@ public class ArcadiaAscension {
 
         while (menuSekarang != 0) {
             cls();
-            Banner();
+            Display.displayBanner();
             System.out.println("==================================================");
             System.out.println("                   Main Menu");
 
@@ -71,7 +73,7 @@ public class ArcadiaAscension {
                 case 3:
                     switch (menuSekarang) {
                         case 1:
-                            StartGame(input);
+                            StartGame();
                             break;
                         case 2:
                             break;
@@ -98,45 +100,42 @@ public class ArcadiaAscension {
         }
     }
 
-    static void StartGame(Scanner input){
-        utils.clearScreen();
-        Banner();
+    static void StartGame(){
+        Scanner input = new Scanner(System.in);
+
+        Utils.clearScreen();
+        Display.displayBanner();
         System.out.println("======================================================");
         System.out.println("\t\tWELCOME PLAYER");
         System.out.print("Masukan nama anda: ");
-        String tes = input.nextLine();//buang buffer yang tertahan
         String playerName = input.nextLine();
         System.out.print("Hallo " + playerName);
 
         
         NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
         PlayerNode player = new PlayerNode(playerName, 250, 75);
+        
+        Level1MemoryGame level1 = new Level1MemoryGame(player);
+        LevelNPC npc = new LevelNPC(player);
         LevelBoss bossLevel = new LevelBoss(player, boss);
-        Level1MemoryGame level1 = new Level1MemoryGame(player, bossLevel);
+
+        // level1.start();
+        // npc.Start();
+        bossLevel.start();
 
         for (int i = 0; i < 15; i++) {
             try {
-                Thread.sleep(250);
+                Thread.sleep(150);
             } catch (Exception e) {
             }
             System.out.print(".");
         }
         
-        level1.start();
-        bossLevel.start();
+        npc.Start();
 
     }
 
-    private static void Banner() {
-        String banner = "    _                      _ _                \n" +
-                "   / \\   _ __ ___ __ _  __| (_) __ _          \n" +
-                "  / _ \\ | '__/ __/ _` |/ _` | |/ _` |         \n" +
-                " / ___ \\| | | (_| (_| | (_| | | (_| |         \n" +
-                "/_/ _ \\_\\_|  \\___\\__,_|\\__,_|_|\\__,_|         \n" +
-                "       / \\   ___  ___ ___ _ __  ___(_) ___  _ __  \n" +
-                "      / _ \\ / __|/ __/ _ \\ '_ \\/ __| |/ _ \\| '_ \\ \n" +
-                "     / ___ \\\\__ \\ (_|  __/ | | \\__ \\ | (_) | | | |\n" +
-                "    /_/   \\_\\___/\\___\\___|_| |_|___/_|\\___/|_| |_|\n";
-        System.out.println(banner);
+    private void About(){
+
     }
 }

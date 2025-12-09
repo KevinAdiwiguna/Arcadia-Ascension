@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import level.level1.Level1MemoryGame;
 import player.PlayerNode;
-import utils.ClearScreen;
+import utils.utils;
 import level.BossLevel.LevelBoss;
 import level.BossLevel.NodeBoss;
 import level.Map.Graph;
@@ -99,7 +99,7 @@ public class ArcadiaAscension {
     }
 
     static void StartGame(Scanner input){
-        ClearScreen.clearScreen();
+        utils.clearScreen();
         Banner();
         System.out.println("======================================================");
         System.out.println("\t\tWELCOME PLAYER");
@@ -123,6 +123,7 @@ public class ArcadiaAscension {
         }
         
         level1.start();
+        bossLevel.start();
 
     }
 

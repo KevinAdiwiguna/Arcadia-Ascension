@@ -2,7 +2,7 @@ package level.BossLevel;
 
 import java.util.Scanner;
 import player.PlayerNode;
-import utils.ClearScreen;
+import utils.utils;
 
 public class LevelBoss {
     PlayerNode player;
@@ -16,7 +16,7 @@ public class LevelBoss {
 
     public void start(){
         while(true){
-            ClearScreen.clearScreen();
+            utils.clearScreen();
 
             System.out.println(boss.displayBoss());
             System.out.println("##=============================================================##");

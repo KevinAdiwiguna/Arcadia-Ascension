@@ -1,6 +1,6 @@
 package utils;
 
-public class ClearScreen {
+public class utils {
     public static void clearScreen() {
         try {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
@@ -13,6 +13,16 @@ public class ClearScreen {
             for (int i = 0; i < 50; i++) {
                 System.out.println();
             }
+        }
+    }
+
+    public static void loadingAnimation() {
+        for (int i = 0; i < 10; i++) {
+            try {
+                Thread.sleep(250);
+            } catch (Exception e) {
+            }
+            System.out.print(".");
         }
     }
 }

@@ -1,5 +1,7 @@
 package player;
 
+import player.inventory.Inventory;
+
 public class PlayerNode {
     private String playerName;
     private int maxHp;

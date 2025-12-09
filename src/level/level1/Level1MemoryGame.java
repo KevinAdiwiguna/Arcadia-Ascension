@@ -1,9 +1,10 @@
 package level.level1;
 
 import java.util.Scanner;
-import utils.ClearScreen;
+import utils.utils;
 import player.PlayerNode;
-import level.BossLevel.LevelBoss; 
+import player.inventory.InventoryNode;
+import level.BossLevel.LevelBoss;
 
 public class Level1MemoryGame {
 
@@ -22,6 +23,7 @@ public class Level1MemoryGame {
     }
 
     public void start() {
+        utils.clearScreen();
         System.out.println("====================================================");
         System.out.println("                LEVEL 1 — TRIAL OF MEMORY          ");
         System.out.println("====================================================");
@@ -31,16 +33,8 @@ public class Level1MemoryGame {
                 "\"Kau hanya punya " + TIMEINSECOND + " detik. Salah satu angka saja… dan nyawamu melayang.\"");
         System.out.println("====================================================\n");
 
-        System.out.println("KAMU SIAP BOCAH!!!");
-        for (int i = 0; i < 15; i++) {
-            try {
-                Thread.sleep(500);
-            } catch (Exception e) {
-            }
-            System.out.print(".");
-        }
-        System.out.println("\n");
-
+        System.out.println("KAMU SIAP BOCAH!!!\n\n");
+     
         while (player.getCurrentHp() > 0) {
 
             System.out.println("----- ROUND " + round + " -----");
@@ -56,7 +50,7 @@ public class Level1MemoryGame {
             } catch (Exception e) {
             }
 
-            ClearScreen.clearScreen();
+            utils.clearScreen();
 
             System.out.println("Cahaya menghilang... semua angka lenyap!");
             System.out.println("Penjaga: \"Sekarang ulangi. Jika salah... jangan salahkan aku.\"");
@@ -76,16 +70,16 @@ public class Level1MemoryGame {
                 System.out.println("Penjaga terdiam. Helm besinya sedikit menunduk.");
                 System.out.println("\"Hmm… ketajaman memorimu tidak mengecewakan, petualang.\"");
                 System.out.println("Gerbang batu di belakangnya perlahan terbuka…");
-                System.out.println("\n>>> LEVEL 1 COMPLETED. Menuju ke level selanjutnya");
 
-                for (int i = 0; i < 10; i++) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                    }
-                    System.out.print(".");
-                }
-                bossLevel.start();
+                System.out.println(
+                        "\nDi balik gerbang yang retak cahaya, sebuah benda berkilau muncul di atas altar batu.");
+                System.out.println(
+                        "Itu adalah sebuah pedang — gagangnya dihiasi ukiran misterius dan mata pedangnya memantulkan aura biru.");
+                System.out.println("Kamu meraihnya... sebuah kekuatan mengalir melalui tanganmu!");
+                System.out.println(">> Kamu mendapatkan **Pedang Perak** dengan DAMAGE +15!!");
+
+                player.getInventory().push(new InventoryNode("Pedang Pahlawan", 25, true));
+
                 break;
 
             } else {
@@ -95,9 +89,12 @@ public class Level1MemoryGame {
                 System.out.println("\"HAHAHHAHA! Bahkan tantangan dasar saja tak mampu kau selesaikan!\"");
                 System.out.println("\"Lemah… sangat lemah. Kembali dan latih otakmu, bocah kecil.\"\"\n");
 
+
                 player.setCurrentHp(player.getCurrentHp() - DAMAGE_PER_FAIL);
                 System.out.println("⚠ Kamu menerima " + DAMAGE_PER_FAIL + " kerusakan!");
                 System.out.println("Sisa HP: " + player.getCurrentHp());
+
+
 
                 if (player.getCurrentHp() <= 0) {
                     System.out.println("\n===================================");
@@ -108,19 +105,13 @@ public class Level1MemoryGame {
                     return;
                 }
 
+                utils.loadingAnimation();
                 System.out.println("\nBersiap untuk ronde berikutnya...");
                 round++;
 
-                for (int i = 0; i < 100; i++) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                    }
-                    System.out.print(".");
-                }
                 System.out.println("\n");
 
-                ClearScreen.clearScreen();
+                utils.clearScreen();
             }
         }
     }

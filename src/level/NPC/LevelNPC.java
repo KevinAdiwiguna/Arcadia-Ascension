@@ -45,6 +45,11 @@ public class LevelNPC {
         
         ClearScreen.clearScreen();
         Banner();
+        
+        System.out.println("=====================================================================================");
+        System.out.println("        -----------------------   BERTEMU NPC  -------------------------");
+        System.out.println("=====================================================================================");
+
         System.out.print("Anda mendapakan potion 'kehidupan'.....");
             input.nextLine();
         System.out.print("Gunakan potion ini untuk menambah darah anda.");

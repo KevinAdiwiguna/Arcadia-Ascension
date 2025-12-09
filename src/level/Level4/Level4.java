@@ -19,7 +19,9 @@ public class Level4 {
         int attempts = 2;
 
         while (attempts > 0) {
-            System.out.println("===== LEVEL 4: Tebak Password 5 Digit =====");
+        System.out.println("=====================================================================================");
+        System.out.println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
+        System.out.println("=====================================================================================");
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];

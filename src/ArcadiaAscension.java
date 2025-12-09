@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import level.level1.Level1MemoryGame;
 import player.PlayerNode;
 import utils.ClearScreen;
 import level.Map.Graph;
@@ -73,6 +72,7 @@ public class ArcadiaAscension {
                             StartGame();
                             break;
                         case 2:
+                            About();
                             break;
                         case 3:
                             System.out.println("Exiting the game.....");
@@ -102,7 +102,6 @@ public class ArcadiaAscension {
 
         
         PlayerNode player = new PlayerNode(playerName, 250, 75);
-        Level1MemoryGame level1 = new Level1MemoryGame(player);
         LevelNPC npc = new LevelNPC(player);
 
         for (int i = 0; i < 15; i++) {
@@ -117,8 +116,26 @@ public class ArcadiaAscension {
 
     }
 
-    private void About(){
+    private static void About(){
+        System.out.println("About the Game:");
+        System.out.println("Arcadia Ascension is an adventurous RPG game where players explore various levels,");
+        System.out.println("battle monsters, and complete quests to ascend to the ultimate relic.");
+        System.out.println("Developed by:");
+        System.out.println("- Gusti Ayu Marsha Widyaswari");
+        System.out.println("- Baiq Erwina Yolanda");
+        System.out.println("- Halis Ibrahim Kumala Chandra");
+        System.out.println("- M. Sagos");
+        System.out.println("- Ni Komang Ayu Sumeitri");
+        System.out.println("- Raisa Bunga Astrella");
+        System.out.println("-Ida Bagus Kevin Adiwiguna");
 
+        System.out.println("\nVersion: 1.0");
+
+        System.out.println("Thank you for playing Arcadia Ascension!");
+        System.out.println("Press Enter to return to the main menu...");
+        
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
     }
 
     private static void Banner() {

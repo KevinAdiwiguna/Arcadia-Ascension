@@ -1,7 +1,5 @@
 package player.inventory;
 
-import player.PlayerNode;
-
 public class InventoryNode {
     String name;
     int damage;     

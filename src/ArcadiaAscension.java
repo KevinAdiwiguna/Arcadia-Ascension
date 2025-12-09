@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import level.level1.Level1MemoryGame;
+import level.level4.SearchingShortingLevel4;
 import player.PlayerNode;
 import utils.Utils;
 import utils.Display;
@@ -118,10 +119,11 @@ public class ArcadiaAscension {
         Level1MemoryGame level1 = new Level1MemoryGame(player);
         LevelNPC npc = new LevelNPC(player);
         LevelBoss bossLevel = new LevelBoss(player, boss);
-
+        SearchingShortingLevel4 level4= new SearchingShortingLevel4(player);
         // level1.start();
         // npc.Start();
-        bossLevel.start();
+        level4.start();
+        // bossLevel.start();
 
         for (int i = 0; i < 15; i++) {
             try {

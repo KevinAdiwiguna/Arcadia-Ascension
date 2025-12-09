@@ -1,7 +1,6 @@
 package level.NPC;
 
 import player.PlayerNode;
-import utils.Utils;
 import java.util.Scanner;
 
 public class LevelNPC {
@@ -31,6 +30,7 @@ public class LevelNPC {
             current = current.next;
             input.nextLine();
         }
+        input.close();
     }
 
     public void addKalimat(String kalimat){

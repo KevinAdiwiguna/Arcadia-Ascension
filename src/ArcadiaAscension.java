@@ -1,39 +1,46 @@
 import java.util.Scanner;
 
+import player.PlayerNode;
+// util
+import utils.Display;
+import utils.Utils;
+// levels
 import level.level1.Level1MemoryGame;
 import level.level4.SearchingShortingLevel4;
-import player.PlayerNode;
-import utils.Utils;
-import utils.Display;
+import level.level3.Level3Game;
 import level.BossLevel.LevelBoss;
 import level.BossLevel.NodeBoss;
-import level.Map.Graph;
 import level.NPC.LevelNPC;
+import level.Map.Graph;
 
 public class ArcadiaAscension {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Graph graph = new Graph(); 
-        
+        Graph graph = new Graph();
 
-        graph.addVertex(0, "Entry"); 
-        graph.addVertex(1, "Ruins Hill"); 
-        graph.addVertex(2, "Labyrinth Tower"); 
-        graph.addVertex(3, "Dora Mountain"); 
-        graph.addVertex(4, "Forest"); 
-        graph.addVertex(5, "Hollow Earth"); 
-        graph.addVertex(6, "The Eternal Relic"); 
-        graph.addVertex(7, "Monster Island"); 
-        graph.addVertex(8, "Safety Room"); 
-        graph.addVertex(9, "Village"); 
-        graph.addEdge(0, 6, 4);graph.addEdge(0, 2, 8); 
-        graph.addEdge(0, 3, 7);graph.addEdge(1, 4, 2); 
-        graph.addEdge(1, 7, 5);graph.addEdge(1, 3, 8); 
-        graph.addEdge(1, 8, 9);graph.addEdge(3, 4, 1); 
-        graph.addEdge(3, 6, 3);graph.addEdge(3, 5, 9); 
-        graph.addEdge(5, 9, 2);graph.addEdge(5, 8, 10); 
-        graph.addEdge(2, 5, 6); 
-        
+        graph.addVertex(0, "Entry");
+        graph.addVertex(1, "Ruins Hill");
+        graph.addVertex(2, "Labyrinth Tower");
+        graph.addVertex(3, "Dora Mountain");
+        graph.addVertex(4, "Forest");
+        graph.addVertex(5, "Hollow Earth");
+        graph.addVertex(6, "The Eternal Relic");
+        graph.addVertex(7, "Monster Island");
+        graph.addVertex(8, "Safety Room");
+        graph.addVertex(9, "Village");
+        graph.addEdge(0, 6, 4);
+        graph.addEdge(0, 2, 8);
+        graph.addEdge(0, 3, 7);
+        graph.addEdge(1, 4, 2);
+        graph.addEdge(1, 7, 5);
+        graph.addEdge(1, 3, 8);
+        graph.addEdge(1, 8, 9);
+        graph.addEdge(3, 4, 1);
+        graph.addEdge(3, 6, 3);
+        graph.addEdge(3, 5, 9);
+        graph.addEdge(5, 9, 2);
+        graph.addEdge(5, 8, 10);
+        graph.addEdge(2, 5, 6);
 
         mainMenu(input);
 
@@ -101,7 +108,7 @@ public class ArcadiaAscension {
         }
     }
 
-    static void StartGame(){
+    static void StartGame() {
         Scanner input = new Scanner(System.in);
 
         Utils.clearScreen();
@@ -112,17 +119,32 @@ public class ArcadiaAscension {
         String playerName = input.nextLine();
         System.out.print("Hallo " + playerName);
 
-        
         NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
         PlayerNode player = new PlayerNode(playerName, 250, 75);
-        
+
+        // level 1
         Level1MemoryGame level1 = new Level1MemoryGame(player);
+        
+        // level 2
+
+        // level 3
+        Level3Game level3 = new Level3Game(player);
+
+        // level 4
+        SearchingShortingLevel4 shortingSearching = new SearchingShortingLevel4(player);
+        
+        // level bonus
         LevelNPC npc = new LevelNPC(player);
+        
+        // level bos
         LevelBoss bossLevel = new LevelBoss(player, boss);
-        SearchingShortingLevel4 level4= new SearchingShortingLevel4(player);
+        
+        
         // level1.start();
+        level3.start();
+        // shortingSearching.start();
         // npc.Start();
-        level4.start();
+        // shortingSearching.start();
         // bossLevel.start();
 
         for (int i = 0; i < 15; i++) {
@@ -132,12 +154,12 @@ public class ArcadiaAscension {
             }
             System.out.print(".");
         }
-        
+
         npc.Start();
 
     }
 
-    private void About(){
+    private void About() {
 
     }
 }

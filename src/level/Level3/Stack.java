@@ -64,15 +64,15 @@ public class Stack {
     }
 
     public Stack cloneStack() {
-        Stack reverse = new Stack();
-        Node cur = top;
-        while (cur != null) {
-            reverse.push(cur.data);
-            cur = cur.next;
-        }
+        Stack temp = new Stack();
         Stack result = new Stack();
-        while (!reverse.isEmpty()) {
-            result.push(reverse.pop());
+        while (!this.isEmpty()) {
+            temp.push(this.pop());
+        }
+        while (!temp.isEmpty()) {
+            String v = temp.pop();
+            this.push(v);
+            result.push(v);
         }
         return result;
     }

@@ -119,7 +119,7 @@ public class ArcadiaAscension {
         System.out.println("\nHallo " + playerName);
 
         System.out.println("Siap untuk berpetualang di Arcadia Ascension?");
-        System.out.print(" [Tekan ENTER untuk Lanjut]...");
+        System.out.print("[Tekan ENTER untuk Lanjut]...");
         input.nextLine();
 
         PlayerNode player = new PlayerNode(playerName, 250, 75);

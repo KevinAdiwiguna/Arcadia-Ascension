@@ -1,3 +1,5 @@
+package komang;
+
 public class PlayerNode {
     private String playerName;
     private int maxHp;

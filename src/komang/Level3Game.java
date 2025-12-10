@@ -1,3 +1,4 @@
+package komang;
 import java.util.Scanner;
 
 public class Level3Game {
@@ -12,7 +13,7 @@ public class Level3Game {
 
     public void start() {
         Stack artefactStack = new Stack();
-        Stack holyChest = new Stack();
+        Stack Peti = new Stack();
         Stack playerHand = new Stack();
 
         // Tumpukan Artefak 
@@ -31,7 +32,7 @@ public class Level3Game {
 
         int hpPenalty = 10;
 
-        ClearScreen.bersihkanLayar();
+        ClearScreen.clearScreen();
         System.out.println("=====================================================================================");
         System.out.println("-----------------------   LEVEL 3 - KUIL ARTEFAK TERBALIK   -------------------------");
         System.out.println("=====================================================================================");
@@ -71,36 +72,41 @@ public class Level3Game {
                     String placing = playerHand.pop();
                     if (placing == null) {
                         System.out.println("Tangan kosong!");
-                    } else {
-                        String expected = correctStack.pop(); 
-
-                        System.out.println("Meletakkan: " + placing);
-
-                        if (!placing.equals(expected)) {
-                            System.out.println("SALAH! Seharusnya: " + expected);
-                            player.setCurrentHp(player.getCurrentHp() - hpPenalty);
-                            System.out.println("HP -" + hpPenalty + " (Sisa: " + player.getCurrentHp() + ")");
-                            correctStack.push(expected); 
-                            playerHand.push(placing);   
-                        } else {
-                            holyChest.push(placing);
-                            System.out.println("Benar! " + placing + " masuk ke Peti Suci.");
-                        }
-
-                        System.out.println("\nPeti Suci Saat Ini:");
-                        holyChest.printStack();
-                        showHand(playerHand);
-
-                        if (correctStack.isEmpty()) {
-                            System.out.println("=====================================================================================");
-                            System.out.println("-------------------------------   NICEE KAMU BERHASIL   -----------------------------");
-                            System.out.println("=====================================================================================");
-                            player.levelUp();
-                            player.getInventory().tambah("Heal Potion");
-                            running = false;
-                        }
+                        break;
                     }
-                    break;
+
+                    String expected = correctStack.pop();
+                    System.out.println("\nMeletakkan: " + placing);
+
+                    if (!placing.equals(expected)) {
+                        System.out.println("SALAH! Seharusnya: " + expected);
+                        player.setCurrentHp(player.getCurrentHp() - hpPenalty);
+                        System.out.println("HP -" + hpPenalty + " (Sisa: " + player.getCurrentHp() + ")");
+                        correctStack.push(expected);
+                        artefactStack.push(placing);
+                         System.out.println("Artefak dikembalikan ke tumpukan artefak.");
+                    } else {
+                        Peti.push(placing);
+                        System.out.println("Benar! " + placing + " masuk ke Peti Suci.");
+                    }
+
+                    System.out.println("\nPeti Suci Saat Ini:");
+                    Peti.printStack();
+
+                    showHand(playerHand);
+
+                    System.out.println("\nTumpukan Artefak:");
+                    artefactStack.printStack();
+
+                    if (correctStack.isEmpty()) {
+                        System.out.println("=====================================================================================");
+                        System.out.println("-------------------------------   NICEE KAMU BERHASIL   -----------------------------");
+                        System.out.println("=====================================================================================");
+                        player.levelUp();
+                        player.getInventory().tambah("Heal Potion");
+                        running = false;
+                    }
+                break;
 
                 case "3":
                     System.out.println("\n--- Tumpukan Artefak ---");
@@ -108,7 +114,7 @@ public class Level3Game {
                     System.out.println("\n--- Tangan Pemain ---");
                     showHand(playerHand);
                     System.out.println("\n--- Peti Suci ---");
-                    holyChest.printStack();
+                    Peti.printStack();
                     System.out.println("\n--- Inventory ---");
                     player.getInventory().tampilkan();
                     break;

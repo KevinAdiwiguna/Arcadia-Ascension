@@ -1,3 +1,4 @@
+package komang;
 public class Inventory {
     private Stack bag = new Stack();
 

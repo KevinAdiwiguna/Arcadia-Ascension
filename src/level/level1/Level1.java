@@ -19,9 +19,10 @@ public class Level1 {
     }
 
     public void start() {
-        System.out.println("====================================================");
-        System.out.println("                LEVEL 1 — TRIAL OF MEMORY          ");
-        System.out.println("====================================================");
+        
+        System.out.println("=====================================================================================");
+        System.out.println("-----------------------   LEVEL 1 — TRIAL OF MEMORY   -------------------------");
+        System.out.println("=====================================================================================");
         System.out.println("Seorang penjaga berzirah hitam menatapmu tajam.");
         System.out.println("\"Petualang... sebelum melangkah lebih jauh, buktikan daya ingatmu.\"");
         System.out.println(

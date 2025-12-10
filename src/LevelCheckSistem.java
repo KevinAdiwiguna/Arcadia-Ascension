@@ -107,4 +107,15 @@ public class LevelCheckSistem {
             System.out.println("ACCESS DENIED");
         }
     }
+
+    
+    static void delay(int length, int ms){
+        for (int i = 0; i < length; i++) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) {
+            }
+            System.out.print(". ");
+        }
+    }
 }

@@ -18,9 +18,9 @@ public class Level4 {
         int[] password = {4, 9, 2, 7, 5};
 
         while (player.getCurrentHp() > 0) {
-        System.out.println("=====================================================================================");
-        System.out.println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
-        System.out.println("=====================================================================================");
+            System.out.println("\n=====================================================================================");
+            System.out.println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
+            System.out.println("=====================================================================================");
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];
@@ -82,15 +82,22 @@ public class Level4 {
             if (semuaBenar) {
                 System.out.println("Password benar! Pintu terbuka!");
                 System.out.println("Lanjut ke level berikutnya");
+
+                delay(25, 150);
+
                 return;
             }
             
-            player.getDamage(10);
+            player.getDamage(25);
+
             System.out.println("Password salah! Coba lagi.");
-            System.out.println("HP: "+player.getCurrentHp());
+            System.out.println("Anda menerima damage dari kegagalan ini....");
+            System.out.println("Health anda sekarang: "+player.getCurrentHp());
+            delay(25, 100);
         }
 
         System.out.println("Kesempatan habis. Pintu tetap terkunci.");
+        delay(25, 100);
     }
 
     // --- Bubble Sort ---
@@ -111,5 +118,15 @@ public class Level4 {
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) result[i] = arr[i];
         return result;
+    }
+    
+    static void delay(int length, int ms){
+        for (int i = 0; i < length; i++) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) {
+            }
+            System.out.print(". ");
+        }
     }
 }

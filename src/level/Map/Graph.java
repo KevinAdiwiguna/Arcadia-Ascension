@@ -142,13 +142,15 @@ public class Graph {
     // Display a compact 8-node map (0..7)
     public void displayMap() {
         String mapTemplate =
-                "   %s  -------- %s ----------- %s\n" +
+                "   %s  ------ %s ------------ %s\n" +
                 "               |                 |\n" +
                 "               |                 |\n" +
-                "              %s ------------ %s\n" +
-                "               |                 |\n" +
-                "               |                 |\n" +
-                "              %s -------- %s";
+                "              %s ------------- %s\n" +
+                "               |                  \\\n" +
+                "               |                   \\\n" +
+                "               |                    \\\n" +
+                "               |                     \\\n" +
+                "              %s ------------------ %s------- %s";
 
         String loc0 = "(0)", loc1 = "(1)", loc2 = "(2)", loc3 = "(3)", loc4 = "(4)", loc5 = "(5)", loc6 = "(6)", loc7 = "(7)";
 
@@ -177,28 +179,25 @@ public class Graph {
             }
         }
 
-        int consoleWidth = 80;
         int mapWidth = 63;
-        int padding = (consoleWidth - mapWidth) / 2;
-        String pad = " ".repeat(Math.max(0, padding));
 
-        System.out.println(pad + "##" + "=".repeat(mapWidth) + "##");
+        System.out.println("##" + "=".repeat(mapWidth) + "##");
         String playerName = getPlayerLocationName().trim();
         String locationText = (playerName.equals("") || playerName.equals(" ")) ? "Location Unknown" : playerName;
         int textLength = locationText.length();
         int centerPadding = Math.max(0, (mapWidth - textLength) / 2);
-        System.out.println(pad + "||"
+        System.out.println("||"
                 + " ".repeat(centerPadding)
                 + locationText
                 + " ".repeat(Math.max(0, mapWidth - textLength - centerPadding))
                 + "||");
-        System.out.println(pad + "##" + "=".repeat(mapWidth) + "##");
+        System.out.println("##" + "=".repeat(mapWidth) + "##");
 
         String filled = String.format(mapTemplate,
                 loc0, loc1, loc3, loc2, loc5, loc4, loc6, loc7);
 
         for (String line : filled.split("\\n")) {
-            System.out.println(pad + line);
+            System.out.println(line);
         }
         System.out.println("\n");
     }

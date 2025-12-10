@@ -106,28 +106,25 @@ public class ArcadiaAscension {
         Banner();
         System.out.println("======================================================");
         System.out.println("\t\tWELCOME PLAYER");
+        System.out.println("======================================================");
         System.out.print("Masukan nama anda: ");
         String playerName = input.nextLine();
-        System.out.println("Hallo " + playerName);
+        delay(25, 100);
+        System.out.println("\nHallo " + playerName);
+
+        System.out.println("Siap untuk berpetualang di Arcadia Ascension?");
+        System.out.print(" [Tekan ENTER untuk Lanjut]...");
+        input.nextLine();
 
         PlayerNode player = new PlayerNode(playerName, 250, 75);
-        LevelNPC npc = new LevelNPC(player);
 
         // Short intro/delay
-        for (int i = 0; i < 15; i++) {
-            try { Thread.sleep(100); } catch (Exception e) {}
-            System.out.print(".");
-        }
+        delay(25, 100);
 
-        // Run NPC intro which gives starting items (no automatic boss start)
-        npc.Start();
-
-        // Initialize player location on the graph (Entry = id 0)
         graph.setPlayerLocation(0);
 
         Scanner sc = new Scanner(System.in);
-        boolean playing = true;
-        while (playing) {
+        while (player.getCurrentHp() > 0) {
             ClearScreen.clearScreen();
             Banner();
 
@@ -159,10 +156,8 @@ public class ArcadiaAscension {
                 delay(25, 200);
             }
 
-            // Run or simulate the level
             runLevel(destId, player);
 
-            // After level finished, mark visited and move player there
             graph.markVisited(destId);
             graph.setPlayerLocation(destId);
 
@@ -170,10 +165,11 @@ public class ArcadiaAscension {
             try { Thread.sleep(700); } catch (Exception e) {}
         }
 
-        System.out.println("Keluar dari game. Sampai jumpa!");
+        System.out.println("Sepertinya keberuntunganmu sudah habis!!!");
+        System.out.println("Senang bertemu denganmu " + player.getPlayerName());
+        delay(25, 100);
     }
 
-    // Minimal runner for levels — call real level classes where available
     static void runLevel(int id, PlayerNode player) {
         String name = graph.findById(id);
         System.out.println("Masuk ke level (" + id + ") " + name + "...");
@@ -210,10 +206,8 @@ public class ArcadiaAscension {
                 boss.start();
                 break;
             default:
-                // For other levels we simulate completion (or you can integrate the real level classes)
-                System.out.println("Mengikuti tantangan di " + name + " ... (simulasi)");
-                try { Thread.sleep(1200); } catch (Exception e) {}
-                System.out.println("Selamat! Kamu menyelesaikan " + name + ".");
+                System.out.println("Input anda tidak valid....");
+                delay(25, 100);
                 break;
         }
     }

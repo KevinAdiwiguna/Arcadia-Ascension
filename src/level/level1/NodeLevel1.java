@@ -1,10 +1,10 @@
 package level.level1;
 
-public class NodeMemoryGame {
+public class NodeLevel1 {
     int data;
-    NodeMemoryGame next;
+    NodeLevel1 next;
 
-    public NodeMemoryGame(int data) {
+    public NodeLevel1(int data) {
         this.data = data;
         this.next = null;
     }

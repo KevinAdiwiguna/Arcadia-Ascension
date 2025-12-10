@@ -9,7 +9,7 @@ public class PlayerNode {
     private int attackPower;
     private int level = 1;
 
-    private Inventory inventory;
+    public Inventory inventory;
 
     public PlayerNode(String playerName, int maxHp, int attackPower) {
         this.playerName = playerName;
@@ -19,22 +19,62 @@ public class PlayerNode {
         this.inventory = new Inventory();
     }
 
-    public String getPlayerName() { return playerName; }
-    public int getMaxHp() { return maxHp; }
-    public int getCurrentHp() { return currentHp; }
-    public int getAttackPower() { return attackPower; }
-    public int getLevel() { return level; }
-    public Inventory getInventory() { return inventory; }
-    
-    public int attack() { return attackPower; }
+    public String getPlayerName() {
+        return playerName;
+    }
 
-    public void setCurrentHp(int hp) { this.currentHp = hp; }
-    public void setDamage(int attackPower) { this.attackPower = attackPower; }
-    public void levelUp() { this.level++; }
+    public int getMaxHp() {
+        return maxHp;
+    }
 
-    public void getDamage(int damage){
+    public int getCurrentHp() {
+        return currentHp;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }// untuk ambil nilai attack power
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public int attack() {
+        return attackPower;
+    }// untuk menyerang
+
+    // set
+    public void setCurrentHp(int hp) {
+        this.currentHp = hp;
+    }
+
+    public void Heal(int totalHeal) {// buat heal
+        currentHp += totalHeal;
+        if (currentHp > maxHp) {
+            currentHp = maxHp;
+        }
+    }
+
+    public void setDamage(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    public void levelUp() {
+        this.level = this.level + 1;
+        this.maxHp = this.maxHp + 50;
+        this.currentHp = this.currentHp + 20;
+
+        utils.Display.showLevelUp(this);
+    }
+
+    public void getDamage(int damage) {
         currentHp -= damage;
-        if(currentHp <= 0){
+        if (currentHp <= 0) {
+            // game over;
         }
     }
 

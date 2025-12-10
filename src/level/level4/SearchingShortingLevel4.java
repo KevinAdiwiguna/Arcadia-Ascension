@@ -3,18 +3,17 @@ package level.level4;
 import java.util.Scanner;
 import player.PlayerNode;
 
-public class SearchingShortingLevel4 {
+public class Level4 {
     PlayerNode player;
     Scanner input = new Scanner(System.in);
 
-    public SearchingShortingLevel4(PlayerNode player) {
+    public Level4(PlayerNode player) {
         this.player = player;
     }
 
-
     public void start() {
         Scanner sc = new Scanner(System.in);
-        int[] password = {4, 9, 2, 7, 5};
+        int[] password = { 4, 9, 2, 7, 5 };
         int attempts = 2;
 
         while (attempts > 0) {
@@ -32,9 +31,10 @@ public class SearchingShortingLevel4 {
             bubbleSort(guessSorted);
 
             int[] freq = new int[10];
-            for (int p : password) freq[p]++;
+            for (int p : password)
+                freq[p]++;
 
-            char[] symbol = new char[5]; 
+            char[] symbol = new char[5];
 
             for (int i = 0; i < 5; i++) {
                 if (guess[i] == password[i]) {
@@ -55,13 +55,15 @@ public class SearchingShortingLevel4 {
             }
 
             System.out.println();
-            System.out.println("X=JAWABAN SALAH\n"+"Y=JAWABAN BENAR POSISI SALAH\n"+"o=JAWABAN BENAR POSISI BENAR\n");
+            System.out
+                    .println("X=JAWABAN SALAH\n" + "Y=JAWABAN BENAR POSISI SALAH\n" + "o=JAWABAN BENAR POSISI BENAR\n");
             System.out.println();
-            for (int i = 0; i < 5; i++) System.out.print(guess[i] + " ");
+            for (int i = 0; i < 5; i++)
+                System.out.print(guess[i] + " ");
             System.out.println();
-            for (int i = 0; i < 5; i++) System.out.print(symbol[i] + " ");
+            for (int i = 0; i < 5; i++)
+                System.out.print(symbol[i] + " ");
             System.out.println("\n");
-
 
             // Cek semua benar
             boolean semuaBenar = true;
@@ -77,10 +79,10 @@ public class SearchingShortingLevel4 {
                 System.out.println("Lanjut ke level berikutnya");
                 return;
             }
-            
+
             attempts--;
             System.out.println("Sisa percobaan: " + attempts + "\n");
-            System.out.println("HP: "+player.getCurrentHp());
+            System.out.println("HP: " + player.getCurrentHp());
             player.getDamage(10);
         }
 
@@ -101,7 +103,8 @@ public class SearchingShortingLevel4 {
 
     private int[] copy(int[] arr) {
         int[] result = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) result[i] = arr[i];
+        for (int i = 0; i < arr.length; i++)
+            result[i] = arr[i];
         return result;
     }
 }

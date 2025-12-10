@@ -1,10 +1,10 @@
 package level.level3;
 
-public class NodeLevel3 {
+public class Node {
     String data;
-    NodeLevel3 next;
+    Node next;
 
-    public NodeLevel3(String d) {
+    public Node(String d) {
         data = d;
         next = null;
 }

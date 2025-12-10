@@ -59,7 +59,13 @@ public class ArcadiaAscension {
             System.out.println((menuSekarang == 3 ? "                 >> Exit <<" : "                    Exit  "));
             System.out.println("--------------------------------------------------");
             System.out.print("Input (1: Up | 2: Down | 3: Pilih): ");
-            int pilihan = input.nextInt();
+            String inputStr = input.nextLine().trim();
+            int pilihan = 0;
+            try {
+                pilihan = Integer.parseInt(inputStr);
+            } catch (NumberFormatException e) {
+                pilihan = 0;
+            }
 
             switch (pilihan) {
                 case 1:
@@ -183,7 +189,7 @@ public class ArcadiaAscension {
                 break;
             case 2:
                 Level2 level2 = new Level2(player);
-                //belom mulai ni
+                level2.start();
                 break;
             case 3:
                 Level3 level3 = new Level3(player);

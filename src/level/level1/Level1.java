@@ -3,6 +3,7 @@ package level.level1;
 import java.util.Scanner;
 import utils.ClearScreen;
 import player.PlayerNode;
+import player.inventory.InventoryNode;
 
 public class Level1 {
 
@@ -69,7 +70,14 @@ public class Level1 {
                 System.out.println("\n✔ Validasi sukses.");
                 System.out.println("Penjaga terdiam. Helm besinya sedikit menunduk.");
                 System.out.println("\"Hmm… ketajaman memorimu tidak mengecewakan, petualang.\"");
-                System.out.println("Gerbang batu di belakangnya perlahan terbuka…");
+                System.out.println("Akanku berikan kau sebuah hadiah kecil.");
+                
+                delay(25, 100);
+                InventoryNode potion = new InventoryNode("Potion keberkahan", 500);
+                player.inventory.push(potion);
+                System.out.println("\nKamu menerima 'Potion keberkahan' yang menyembuhkan 500 HP.");
+                delay(25, 100);
+                System.out.println("\nGerbang batu di belakangnya perlahan terbuka…");
                 System.out.println("\n>>> LEVEL 1 COMPLETED. Menuju ke level selanjutnya");
 
                 delay(25, 100);

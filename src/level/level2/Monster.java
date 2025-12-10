@@ -4,13 +4,13 @@ class Monster {
     String nama;
     int damage;
     int health;
-    int index_level; // kalo kepake
+    int maxhealth;
 
-    Monster(String namaMonster, int damageMonster, int healthMonster, int indexLevelMon) {
+    Monster(String namaMonster, int damageMonster, int healthMonster) {
         this.nama = namaMonster;
         this.damage = damageMonster;
         this.health = healthMonster;
-        this.index_level = indexLevelMon;
+        this.maxhealth = healthMonster;
         this.next = null;
     }
 }

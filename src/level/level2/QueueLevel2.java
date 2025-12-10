@@ -1,14 +1,15 @@
 package level.level2;
-class Level2 {
-    Monster front = null;
-    Monster rear = null;
+
+public class QueueLevel2 {
+    private Monster front = null;
+    private Monster rear = null;
 
     boolean isEmpty() {
         return front == null;
     }
 
-    void enqueue(String namaMonster, int damageMonster, int healthMonster, int indexLevelMon) {
-        Monster newMonster = new Monster(namaMonster, damageMonster, healthMonster, indexLevelMon);
+    public void enqueue(String namaMonster, int damageMonster, int healthMonster) {
+        Monster newMonster = new Monster(namaMonster, damageMonster, healthMonster);
 
         if (isEmpty()) {
             front = newMonster;
@@ -19,7 +20,7 @@ class Level2 {
         rear = newMonster;
     }
 
-    void dequeue() {
+    public void dequeue() {
         if (isEmpty()) {
             return;
         }
@@ -28,4 +29,9 @@ class Level2 {
             rear = null;
         }
     }
+
+    public Monster peek() {
+        return front;
+    }
+
 }

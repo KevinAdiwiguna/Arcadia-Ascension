@@ -1,7 +1,15 @@
 package level.level2;
-class Level2 {
+
+import player.PlayerNode;
+
+public class Level2 {
     Monster front = null;
     Monster rear = null;
+    PlayerNode player;
+
+    public Level2(PlayerNode player) {
+        this.player = player;
+    }
 
     boolean isEmpty() {
         return front == null;

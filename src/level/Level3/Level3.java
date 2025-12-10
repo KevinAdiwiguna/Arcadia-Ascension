@@ -5,14 +5,13 @@ import player.PlayerNode;
 import player.inventory.InventoryNode;
 import utils.ClearScreen;
 
-public class Level3Game {
+public class Level3 {
 
     private PlayerNode player;
-    private Scanner scanner;
+    Scanner scanner = new Scanner(System.in);
 
-    public Level3Game(PlayerNode player) {
+    public Level3(PlayerNode player) {
         this.player = player;
-        this.scanner = new Scanner(System.in);
     }
 
     public void start() {
@@ -57,10 +56,10 @@ public class Level3Game {
             System.out.println("3. Lihat Semua");
             System.out.println("4. Keluar");
             System.out.print("Pilihan: ");
-            String choice = scanner.nextLine().trim();
+            int choice = scanner.nextInt();
 
             switch (choice) {
-                case "1":
+                case 1:
                     String taken = artefactStack.pop();
                     if (taken == null) {
                         System.out.println("Tidak ada artefak lagi!");
@@ -72,7 +71,7 @@ public class Level3Game {
                     }
                     break;
 
-                case "2":
+                case 2:
                     String placing = playerHand.pop();
                     if (placing == null) {
                         System.out.println("Tangan kosong!");
@@ -109,7 +108,7 @@ public class Level3Game {
                     }
                     break;
 
-                case "3":
+                case 3:
                     System.out.println("\n--- Tumpukan Artefak ---");
                     artefactStack.printStack();
                     System.out.println("\n--- Tangan Pemain ---");
@@ -120,7 +119,7 @@ public class Level3Game {
                     player.inventory.printInventory();
                     break;
 
-                case "4":
+                case 4:
                     running = false;
                     break;
 

@@ -3,9 +3,8 @@ package level.level1;
 import java.util.Scanner;
 import utils.ClearScreen;
 import player.PlayerNode;
-import level.BossLevel.LevelBoss; 
 
-public class Level1MemoryGame {
+public class Level1 {
 
     private final int TOTAL_NUMBERS = 5;
     private final int TIMEINSECOND = 5;
@@ -13,10 +12,9 @@ public class Level1MemoryGame {
 
     private final Scanner scanner = new Scanner(System.in);
     private PlayerNode player;
-    private LevelBoss bossLevel;
     private int round = 1;
 
-    public Level1MemoryGame(PlayerNode player) {
+    public Level1(PlayerNode player) {
         this.player = player;
     }
 
@@ -31,20 +29,16 @@ public class Level1MemoryGame {
         System.out.println("====================================================\n");
 
         System.out.println("KAMU SIAP BOCAH!!!");
-        for (int i = 0; i < 15; i++) {
-            try {
-                Thread.sleep(500);
-            } catch (Exception e) {
-            }
-            System.out.print(".");
-        }
+        
+        delay(25, 100);
+
         System.out.println("\n");
 
         while (player.getCurrentHp() > 0) {
 
             System.out.println("----- ROUND " + round + " -----");
 
-            LinkedListMemoryGame list = new LinkedListMemoryGame();
+            LinkedListLevel1 list = new LinkedListLevel1();
             list.addRandom(TOTAL_NUMBERS);
 
             System.out.println("\nAngka-angka muncul dalam cahaya biru:");
@@ -77,14 +71,8 @@ public class Level1MemoryGame {
                 System.out.println("Gerbang batu di belakangnya perlahan terbuka…");
                 System.out.println("\n>>> LEVEL 1 COMPLETED. Menuju ke level selanjutnya");
 
-                for (int i = 0; i < 10; i++) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                    }
-                    System.out.print(".");
-                }
-                bossLevel.start();
+                delay(25, 100);
+                
                 break;
 
             } else {
@@ -110,17 +98,22 @@ public class Level1MemoryGame {
                 System.out.println("\nBersiap untuk ronde berikutnya...");
                 round++;
 
-                for (int i = 0; i < 100; i++) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                    }
-                    System.out.print(".");
-                }
+                delay(25, 100);
                 System.out.println("\n");
 
                 ClearScreen.clearScreen();
             }
+        }
+    }
+
+    
+    static void delay(int length, int ms){
+        for (int i = 0; i < length; i++) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) {
+            }
+            System.out.print(". ");
         }
     }
 }

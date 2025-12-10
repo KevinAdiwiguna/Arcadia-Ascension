@@ -4,34 +4,44 @@ import player.PlayerNode;
 import utils.ClearScreen;
 import level.Map.Graph;
 import level.NPC.LevelNPC;
+import level.BossLevel.LevelBoss;
+import level.level1.Level1;
+import level.level2.Level2;
+import level.Level3.Level3;
+import level.Level4.Level4;
 
 public class ArcadiaAscension {
+    static Graph graph;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Graph graph = new Graph(); 
+        graph = new Graph(); 
         
 
-        graph.addVertex(0, "Entry"); 
-        graph.addVertex(1, "Ruins Hill"); 
-        graph.addVertex(2, "Labyrinth Tower"); 
-        graph.addVertex(3, "Dora Mountain"); 
-        graph.addVertex(4, "Forest"); 
-        graph.addVertex(5, "Hollow Earth"); 
-        graph.addVertex(6, "The Eternal Relic"); 
-        graph.addVertex(7, "Monster Island"); 
-        graph.addVertex(8, "Safety Room"); 
-        graph.addVertex(9, "Village"); 
-        graph.addEdge(0, 6, 4);graph.addEdge(0, 2, 8); 
-        graph.addEdge(0, 3, 7);graph.addEdge(1, 4, 2); 
-        graph.addEdge(1, 7, 5);graph.addEdge(1, 3, 8); 
-        graph.addEdge(1, 8, 9);graph.addEdge(3, 4, 1); 
-        graph.addEdge(3, 6, 3);graph.addEdge(3, 5, 9); 
-        graph.addEdge(5, 9, 2);graph.addEdge(5, 8, 10); 
-        graph.addEdge(2, 5, 6); 
-        
+        graph.addVertex(0, "Entry"); //mainMenu
+        graph.addVertex(1, "Level 1"); //level 1
+        graph.addVertex(2, "Level 2"); //level 2
+        graph.addVertex(3, "Level 3"); //level 3 
+        graph.addVertex(4, "Level 4"); //level 4
+        graph.addVertex(5, "Level 5"); //NPC
+        graph.addVertex(6, "Level 6");//level check
+        graph.addVertex(7, "Level 7");//boss
+
+        graph.addEdge(0, 1, 4);
+
+        graph.addEdge(1, 2, 2); 
+        graph.addEdge(1, 3, 5);
+
+        graph.addEdge(2, 4, 8); 
+        graph.addEdge(2, 5, 9);
+
+        graph.addEdge(3, 5, 1); 
+
+        graph.addEdge(4, 6, 3);
+        graph.addEdge(5, 6, 9); 
+
+        graph.addEdge(6, 7, 2);
 
         mainMenu(input);
-
     }
 
     static void mainMenu(Scanner input) {
@@ -98,22 +108,114 @@ public class ArcadiaAscension {
         System.out.println("\t\tWELCOME PLAYER");
         System.out.print("Masukan nama anda: ");
         String playerName = input.nextLine();
-        System.out.print("Hallo " + playerName);
+        System.out.println("Hallo " + playerName);
 
-        
         PlayerNode player = new PlayerNode(playerName, 250, 75);
         LevelNPC npc = new LevelNPC(player);
 
+        // Short intro/delay
         for (int i = 0; i < 15; i++) {
-            try {
-                Thread.sleep(150);
-            } catch (Exception e) {
-            }
+            try { Thread.sleep(100); } catch (Exception e) {}
             System.out.print(".");
         }
-        
+
+        // Run NPC intro which gives starting items (no automatic boss start)
         npc.Start();
 
+        // Initialize player location on the graph (Entry = id 0)
+        graph.setPlayerLocation(0);
+
+        Scanner sc = new Scanner(System.in);
+        boolean playing = true;
+        while (playing) {
+            ClearScreen.clearScreen();
+            Banner();
+
+            // Show the map and current location
+            graph.displayMap();
+
+            String currentName = graph.getPlayerLocationName().trim();
+            System.out.println("Current Location: " + (currentName.equals(" ") ? "Unknown" : currentName));
+            System.out.println("Adjacent locations:");
+            graph.displayAdjacentLocations(currentName);
+
+            System.out.println("\nMasukkan id lokasi tujuan: ");
+            int destId = sc.nextInt();
+
+            String destName = graph.findById(destId).trim();
+            if (destName.equals(" ") || destName.equals("")) {
+                System.out.println("ID tujuan tidak valid.");
+                delay(25, 200);
+            }
+
+            if (!graph.isValidDestination(currentName, destName)) {
+                System.out.println("Tujuan tidak terhubung dari lokasi saat ini.");
+                delay(25, 200);
+            }
+
+            if (graph.isVisited(destId)) {
+                System.out.println("Level ini sudah dikunjungi: " + destName);
+                graph.setPlayerLocation(destId);
+                delay(25, 200);
+            }
+
+            // Run or simulate the level
+            runLevel(destId, player);
+
+            // After level finished, mark visited and move player there
+            graph.markVisited(destId);
+            graph.setPlayerLocation(destId);
+
+            System.out.println("Kembali ke peta...");
+            try { Thread.sleep(700); } catch (Exception e) {}
+        }
+
+        System.out.println("Keluar dari game. Sampai jumpa!");
+    }
+
+    // Minimal runner for levels — call real level classes where available
+    static void runLevel(int id, PlayerNode player) {
+        String name = graph.findById(id);
+        System.out.println("Masuk ke level (" + id + ") " + name + "...");
+        try { Thread.sleep(800); } catch (Exception e) {}
+
+        ClearScreen.clearScreen();
+        switch (id) {
+            case 1://memory game
+                Level1 level1 = new Level1(player);
+                level1.start();
+                break;
+            case 2:
+                Level2 level2 = new Level2(player);
+                //belom mulai ni
+                break;
+            case 3:
+                Level3 level3 = new Level3(player);
+                level3.start();
+                break;
+            case 4:
+                Level4 level4 = new Level4(player);
+                level4.start();
+                break;
+            case 5:
+                LevelNPC npc = new LevelNPC(player);
+                npc.Start();
+                break;
+            case 6: // Hollow Earth -> Level check system (example)
+                LevelCheckSistem check = new LevelCheckSistem();
+                check.runLevelCheck();
+                break;
+            case 7: // The Eternal Relic -> Boss
+                LevelBoss boss = new LevelBoss(player);
+                boss.start();
+                break;
+            default:
+                // For other levels we simulate completion (or you can integrate the real level classes)
+                System.out.println("Mengikuti tantangan di " + name + " ... (simulasi)");
+                try { Thread.sleep(1200); } catch (Exception e) {}
+                System.out.println("Selamat! Kamu menyelesaikan " + name + ".");
+                break;
+        }
     }
 
     private static void About(){
@@ -149,5 +251,15 @@ public class ArcadiaAscension {
                 "     / ___ \\\\__ \\ (_|  __/ | | \\__ \\ | (_) | | | |\n" +
                 "    /_/   \\_\\___/\\___\\___|_| |_|___/_|\\___/|_| |_|\n";
         System.out.println(banner);
+    }
+
+    static void delay(int length, int ms){
+        for (int i = 0; i < length; i++) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) {
+            }
+            System.out.print(". ");
+        }
     }
 }

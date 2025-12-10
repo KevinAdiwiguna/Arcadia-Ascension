@@ -16,9 +16,8 @@ public class Level4 {
     public void start() {
         Scanner sc = new Scanner(System.in);
         int[] password = {4, 9, 2, 7, 5};
-        int attempts = 2;
 
-        while (attempts > 0) {
+        while (player.getCurrentHp() > 0) {
         System.out.println("=====================================================================================");
         System.out.println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
         System.out.println("=====================================================================================");
@@ -86,10 +85,9 @@ public class Level4 {
                 return;
             }
             
-            attempts--;
-            System.out.println("Sisa percobaan: " + attempts + "\n");
-            System.out.println("HP: "+player.getCurrentHp());
             player.getDamage(10);
+            System.out.println("Password salah! Coba lagi.");
+            System.out.println("HP: "+player.getCurrentHp());
         }
 
         System.out.println("Kesempatan habis. Pintu tetap terkunci.");

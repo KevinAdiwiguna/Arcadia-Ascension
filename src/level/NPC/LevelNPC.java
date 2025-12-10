@@ -2,7 +2,6 @@ package level.NPC;
 
 import player.*;
 import player.inventory.InventoryNode;
-import level.BossLevel.LevelBoss;
 import utils.ClearScreen;
 import java.util.Scanner;
 
@@ -60,9 +59,6 @@ public class LevelNPC {
         player.inventory.push(potion2);
         player.inventory.push(potion3);
         player.inventory.push(potion4);
-
-        LevelBoss levelBoss = new LevelBoss(player);
-        levelBoss.start();
     }
 
     public void addKalimat(String kalimat){

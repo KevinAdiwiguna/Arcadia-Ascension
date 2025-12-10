@@ -1,6 +1,6 @@
 package level.level1;
 
-public class LinkedListMemoryGame {
+public class LinkedListLevel1 {
 
     NodeMemoryGame head;
 

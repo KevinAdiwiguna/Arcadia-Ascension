@@ -51,33 +51,7 @@ public class ArcadiaAscension {
 
         graph.addEdge(6, 7, 2);
 
-        // mainMenu(input);
-
-        PlayerNode player = new PlayerNode("kevin", 100000, 75);
-        InventoryNode potion1 = new InventoryNode("Potion keberkahan", 500);
-        InventoryNode potion2 = new InventoryNode("Potion keberkahan2", 500);
-        InventoryNode potion3 = new InventoryNode("Potion keberkahan3", 500);
-        InventoryNode potion4 = new InventoryNode("Potion keberkahan4", 500);
-
-        player.inventory.push(potion1);
-        player.inventory.push(potion2);
-        player.inventory.push(potion3);
-        player.inventory.push(potion4);
-
-        // Level1 level1 = new Level1(player);
-        // level1.start();
-        // Level2 level2 = new Level2(player);
-        // level2.start();
-        // Level3 level3 = new Level3(player);
-        // level3.start();
-        Level4 level4 = new Level4(player);
-        level4.start();
-        // LevelNPC npc = new LevelNPC(player);
-        // npc.Start();
-        LevelBoss levelBoss = new LevelBoss(player);
-        levelBoss.start();
-
-
+        mainMenu(input);
     }
 
     static void mainMenu(Scanner input) {
@@ -155,69 +129,52 @@ public class ArcadiaAscension {
         input.nextLine();
 
         PlayerNode player = new PlayerNode(playerName, 150, 75);
-        InventoryNode potion1 = new InventoryNode("Potion keberkahan", 500);
-        InventoryNode potion2 = new InventoryNode("Potion keberkahan2", 500);
-        InventoryNode potion3 = new InventoryNode("Potion keberkahan3", 500);
-        InventoryNode potion4 = new InventoryNode("Potion keberkahan4", 500);
-
-        player.inventory.push(potion1);
-        player.inventory.push(potion2);
-        player.inventory.push(potion3);
-        player.inventory.push(potion4);
         graph.setPlayerLocation(0);
-
-        Level1 level1 = new Level1(player);
-        level1.start();
 
         utils.Utils.loadingAnimation(25, 100);
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("==============================================================");
+        System.out.println(" 📜 PETA KERAJAAN ARCADIA 📜");
+        System.out.println("==============================================================");
+        utils.Utils.loadingAnimation(20, 80);
+
+        System.out.println("Seorang sosok berjubah mendekat perlahan... bayangannya memanjang di lantai satu.\n" +
+                "Suara berat namun tenang terdengar dari balik tudungnya:");
+
+        utils.Utils.loadingAnimation(25, 90);
+        System.out.println();
+        System.out.println(" \"Perjalananmu tidak akan mudah, petualang...\"");
+        utils.Utils.loadingAnimation(25, 90);
+        System.out.println(" \"Namun aku akan memberimu panduan agar kau tidak tersesat.\"");
+        utils.Utils.loadingAnimation(25, 90);
+
+        System.out.println();
+        System.out.println(
+                "Sosok itu mengeluarkan sehelai gulungan tua dari balik jubahnya.\n" +
+                        "Kau dapat melihat simbol-simbol kuno terukir samar di permukaannya...");
+
+        utils.Utils.loadingAnimation(25, 90);
+        System.out.println();
+        System.out.println(" \"Ambillah. Ini adalah peta wilayah Arcadia.\"");
+        utils.Utils.loadingAnimation(25, 90);
+        System.out.println(" \"Pahami rutenya... dan jangan biarkan kegelapan mengejarmu.\"");
+
+        utils.Utils.loadingAnimation(25, 90);
+        System.out.println();
+        System.out.println(
+                "Saat gulungan itu berada di tanganmu, ia langsung membuka sendiri,\n" +
+                        "menampilkan jalur, node, dan lokasi penuh misteri di hadapanmu...");
+        utils.Utils.loadingAnimation(20, 80);
+
+        System.out.println("\n==============================================================");
+        System.out.println(" 📍 PETA TERBENTANG DI DEPANMU 📍");
+        System.out.println("==============================================================\n");
+        // end narasi
+        // ===========================================================================================
+
         while (player.getCurrentHp() > 0) {
-            Utils.clearScreen();
-            // start narasi
-            // ===========================================================================================
-
-            System.out.println("==============================================================");
-            System.out.println(" 📜 PETA KERAJAAN ARCADIA 📜");
-            System.out.println("==============================================================");
-            utils.Utils.loadingAnimation(20, 80);
-
-            System.out.println("Seorang sosok berjubah mendekat perlahan... bayangannya memanjang di lantai satu.\n" +
-                    "Suara berat namun tenang terdengar dari balik tudungnya:");
-
-            utils.Utils.loadingAnimation(25, 90);
-            System.out.println();
-            System.out.println(" \"Perjalananmu tidak akan mudah, petualang...\"");
-            utils.Utils.loadingAnimation(25, 90);
-            System.out.println(" \"Namun aku akan memberimu panduan agar kau tidak tersesat.\"");
-            utils.Utils.loadingAnimation(25, 90);
-
-            System.out.println();
-            System.out.println(
-                    "Sosok itu mengeluarkan sehelai gulungan tua dari balik jubahnya.\n" +
-                            "Kau dapat melihat simbol-simbol kuno terukir samar di permukaannya...");
-
-            utils.Utils.loadingAnimation(25, 90);
-            System.out.println();
-            System.out.println(" \"Ambillah. Ini adalah peta wilayah Arcadia.\"");
-            utils.Utils.loadingAnimation(25, 90);
-            System.out.println(" \"Pahami rutenya... dan jangan biarkan kegelapan mengejarmu.\"");
-
-            utils.Utils.loadingAnimation(25, 90);
-            System.out.println();
-            System.out.println(
-                    "Saat gulungan itu berada di tanganmu, ia langsung membuka sendiri,\n" +
-                            "menampilkan jalur, node, dan lokasi penuh misteri di hadapanmu...");
-            utils.Utils.loadingAnimation(20, 80);
-
-            System.out.println("\n==============================================================");
-            System.out.println(" 📍 PETA TERBENTANG DI DEPANMU 📍");
-            System.out.println("==============================================================\n");
-            // end narasi
-            // ===========================================================================================
-
             graph.displayMap();
-
             String currentName = graph.getPlayerLocationName().trim();
             System.out.println("Current Location: " + (currentName.equals(" ") ? "Unknown" : currentName));
             System.out.println("Adjacent locations:");
@@ -274,30 +231,34 @@ public class ArcadiaAscension {
             case 1:
                 Level1 level1 = new Level1(player);
                 level1.start();
+                Utils.clearScreen();
                 break;
             case 2:
                 Level2 level2 = new Level2(player);
                 level2.start();
+                Utils.clearScreen();
                 break;
             case 3:
                 Level3 level3 = new Level3(player);
                 level3.start();
+                Utils.clearScreen();
                 break;
             case 4:
                 Level4 level4 = new Level4(player);
                 level4.start();
+                Utils.clearScreen();
                 break;
             case 5:
                 LevelNPC npc = new LevelNPC(player);
                 npc.Start();
+                Utils.clearScreen();
                 break;
-            case 6: // Hollow Earth -> Level check system (example)
-                // LevelCheckSistem check = new LevelCheckSistem();
-                // check.runLevelCheck();
+            case 6:
+                
                 break;
-            case 7: // The Eternal Relic -> Boss
-                // LevelBoss boss = new LevelBoss(player);
-                // boss.start();
+            case 7:
+                LevelBoss bossLevel = new LevelBoss(player);
+                bossLevel.start();
                 break;
             default:
                 System.out.println("Input anda tidak valid....");

@@ -1,8 +1,9 @@
 package level.BossLevel;
 
 import java.util.Scanner;
+
 import player.*;
-import utils.ClearScreen;
+import utils.Utils;
 
 public class LevelBoss {
     PlayerNode player;
@@ -14,11 +15,11 @@ public class LevelBoss {
         this.player = player;
     }
 
-    public void start(){
-        
+    public void start() {
+
         NodeBoss boss = new NodeBoss("Dark Lord", 1000, 75);
 
-        ClearScreen.clearScreen();
+        Utils.clearScreen();
         System.out.println("##=============================================================##");
         System.out.println("\t\t\t" + boss.nama);
         System.out.println("##=============================================================##");
@@ -26,15 +27,17 @@ public class LevelBoss {
         delay(25, 10);
         System.out.println("\nBerhati-hatilah");
         delay(25, 10);
-        while(player.getCurrentHp() > 0 && boss.getCurrentHp() > 0){
-            ClearScreen.clearScreen();
+        while (player.getCurrentHp() > 0 && boss.getCurrentHp() > 0) {
+            Utils.clearScreen();
 
             System.out.println(boss.displayBoss());
             System.out.println("##=============================================================##");
-            System.out.println("|| Player Health : " + player.getCurrentHp() + "\t\t\t\t||Boss Health: " + boss.getCurrentHp() + "||");
-            System.out.println("|| Player Damage : " + player.getAttackPower() + "\t\t\t\t||Boss Damage: " + boss.getAttackPower() + "||");
+            System.out.println("|| Player Health : " + player.getCurrentHp() + "\t\t\t\t||Boss Health: "
+                    + boss.getCurrentHp() + "||");
+            System.out.println("|| Player Damage : " + player.getAttackPower() + "\t\t\t\t||Boss Damage: "
+                    + boss.getAttackPower() + "||");
             System.out.println("##=============================================================##");
-            
+
             System.out.println("Berikan pilihan anda: ");
             System.out.println("1. Serang");
             System.out.println("2. Gunakan Potion");
@@ -49,36 +52,29 @@ public class LevelBoss {
                 case 2:
                     player.inventory.printInventory();
                     int count = player.inventory.hitungTotalInventory();
-                    if(count <= 0){
+                    if (count <= 0) {
                         System.out.println("Anda tidak memiliki barang..");
-                    } else{
-                        System.out.print("Potion yang akan anda gunakan: ");//berdasarkan nama potion
-                        String namaPotion = inputString.nextLine();
-                        if(player.inventory.SearchPotion(namaPotion)){
-                            player.inventory.UsePotion(namaPotion);
-                        }else{
-                            System.out.println("Barang tidak ditemukan...");
-                        }
-                        delay(25, 100);
+                    } else {
+                        Utils.potionUse(player);
                     }
-
 
                 default:
                     break;
             }
         }
 
-        if(player.getCurrentHp() > 0){
+        if (player.getCurrentHp() > 0) {
             System.out.println("\nBos telah dikalahkan.....\n Kamu menang.............\n");
-        }else{
-            System.out.println("\n" + player.getPlayerName() + ", Kesempatan kamu habis.....\n Kamu Kalah.............\n");
+        } else {
+            System.out.println(
+                    "\n" + player.getPlayerName() + ", Kesempatan kamu habis.....\n Kamu Kalah.............\n");
         }
 
         delay(25, 150);
 
     }
 
-    static void delay(int length, int ms){
+    static void delay(int length, int ms) {
         for (int i = 0; i < length; i++) {
             try {
                 Thread.sleep(ms);

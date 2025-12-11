@@ -1,7 +1,7 @@
-package level.Level3;
+package level.level3;
 
 import java.util.Scanner;
-import utils.ClearScreen;
+import utils.Utils;
 import player.PlayerNode;
 import player.inventory.InventoryNode;
 
@@ -41,7 +41,7 @@ public class Level3 {
 
         while (running && player.getCurrentHp() > 0) {
 
-            ClearScreen.clearScreen();
+            Utils.clearScreen();
             System.out.println("=====================================================================================");
             System.out.println("-----------------------   LEVEL 3 - KUIL ARTEFAK TERBALIK   -------------------------");
             System.out.println("Kamu memasuki Kuil Artefak Terbalik.\n" +
@@ -57,7 +57,7 @@ public class Level3 {
             displayCorrect.printSingleLine();
             System.out.println();
 
-            System.out.println("HP: " + player.getCurrentHp() + " | Level: 3");
+            System.out.println("HP: " + player.getCurrentHp());
             System.out.println("\n1. Ambil Artefak (POP)");
             System.out.println("2. Letakkan ke Peti Suci (PUSH)");
             System.out.println("3. Lihat Semua");

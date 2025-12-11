@@ -127,30 +127,27 @@ public class Graph {
         }
     }
 
-    // Mark a vertex as visited (player has entered/completed that level)
     public void markVisited(int id) {
         Vertex v = findVertex(id);
         if (v != null) v.visited = true;
     }
 
-    // Check if a vertex has been visited
     public boolean isVisited(int id) {
         Vertex v = findVertex(id);
         return v != null && v.visited;
     }
 
-    // Display a compact 8-node map (0..7)
     public void displayMap() {
         String mapTemplate =
-                "   %s  ------ %s ------------ %s\n" +
-                "               |                 |\n" +
-                "               |                 |\n" +
-                "              %s ------------- %s\n" +
-                "               |                  \\\n" +
-                "               |                   \\\n" +
-                "               |                    \\\n" +
-                "               |                     \\\n" +
-                "              %s ------------------ %s------- %s";
+                "        %s ------ %s ------------ %s\n" +
+                "                    |                 |\n" +
+                "                    |                 |\n" +
+                "                   %s ------------- %s\n" +
+                "                    |                  \\\n" +
+                "                    |                   \\\n" +
+                "                    |                    \\\n" +
+                "                    |                     \\\n" +
+                "                   %s ------------------ %s ------- %s";
 
         String loc0 = "(0)", loc1 = "(1)", loc2 = "(2)", loc3 = "(3)", loc4 = "(4)", loc5 = "(5)", loc6 = "(6)", loc7 = "(7)";
 
@@ -161,8 +158,6 @@ public class Graph {
                 mark = "( )";
             } else if (v.id == playerLocationId) {
                 mark = "(P)";
-            } else if (v.visited) {
-                mark = "(#)";
             } else {
                 mark = "(" + v.id + ")";
             }

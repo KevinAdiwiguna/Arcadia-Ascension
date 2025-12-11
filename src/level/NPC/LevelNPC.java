@@ -1,90 +1,63 @@
 package level.NPC;
 
-import player.*;
+import player.PlayerNode;
 import player.inventory.InventoryNode;
-import utils.ClearScreen;
+import utils.Display;
+import utils.Utils;
 import java.util.Scanner;
 
 public class LevelNPC {
-    NodeKalimat first;
     PlayerNode player;
 
-    public LevelNPC(PlayerNode player){
+    public LevelNPC(PlayerNode player) {
         this.player = player;
     }
 
-    public void Start(){
-        addKalimat("Hallo " + player.getPlayerName());
-        addKalimat("Apa kabar hari ini?");
-        addKalimat("Apakah kamu tau bahwa di dunia ini ada banyak rahasia tersembunyi?");
-        addKalimat("di ujung gunung ini terdapat sebuah relik kuno yang sangat kuat.");
-        addKalimat("tapi ada Dark Lord yang menjaga relik tersebut.");
-        addKalimat("kamu perlu senjata untuk mengalahkannya.");
-        addKalimat("saya akan memberikanmu sebuah potion legendaris.");
-        addKalimat("kalahkan dia dan dapatkan relik itu!");
-        
-        InventoryNode potionKehidupan = new InventoryNode("potion Kehidupan", 1000);
-        InventoryNode potionHidup = new InventoryNode("potion hidup", 1000);
-        InventoryNode potion1 = new InventoryNode("potion 1", 1000);
-        InventoryNode potion2 = new InventoryNode("potion 2", 1000);
-        InventoryNode potion3 = new InventoryNode("potion 3", 1000);
-        InventoryNode potion4 = new InventoryNode("potion 4", 1000);
+    public void Start() {
+        LinkedListKalimat kalimat = new LinkedListKalimat();
 
-        NodeKalimat current = first;
+        kalimat.addKalimat("NPC : Ah... akhirnya kau datang juga, " + player.getPlayerName() + ".");
+        kalimat.addKalimat("NPC : Perjalananmu sampai titik ini tidaklah mudah, bukan?");
+        kalimat.addKalimat("NPC : Namun semakin jauh kau melangkah, semakin gelap rahasia dunia ini terbuka.");
+        kalimat.addKalimat("NPC : Di balik puncak gunung ini terdapat Relik Kuno yang mampu membangkitkan kekuatan para leluhur.");
+        kalimat.addKalimat("NPC : Sayangnya... Relik itu dijaga oleh Dark Lord, makhluk yang kekuatannya semakin tumbuh setiap malam.");
+        kalimat.addKalimat("NPC : Jika kau ingin bertahan melawannya, kau membutuhkan kekuatan tambahan.");
+        kalimat.addKalimat("NPC : Aku akan memberikanmu tiga ramuan penyembuh langka.");
+        kalimat.addKalimat("NPC : Gunakan mereka dengan bijak... nasibmu di medan pertempuran bergantung padanya.");
+
+        InventoryNode aetherBloom = new InventoryNode("Aether Bloom (heal potion)", 150);
+        InventoryNode elixirVitalis = new InventoryNode("Elixir Vitalis (heal potion)", 300);
+        InventoryNode draughtOfLife = new InventoryNode("Draught of Life (heal potion)", 600);
+
         Scanner input = new Scanner(System.in);
-        ClearScreen.clearScreen();
-        Banner();
-        while(current != null){
-            System.out.println("\nNPC: " + current.kalimat);
-            System.out.print(" [Tekan ENTER untuk Lanjut]...");
-            current = current.next;
-            input.nextLine();
-        }
 
-        
-        ClearScreen.clearScreen();
-        Banner();
-        
+        Utils.clearScreen();
+        Display.displayBanner();
+
         System.out.println("=====================================================================================");
         System.out.println("        -----------------------   BERTEMU NPC  -------------------------");
         System.out.println("=====================================================================================");
 
-        System.out.print("Anda mendapakan potion 'kehidupan'.....");
-            input.nextLine();
-        System.out.print("Gunakan potion ini untuk menambah darah anda.");
-            input.nextLine();
-        player.inventory.push(potionKehidupan);
-        player.inventory.push(potionHidup);
-        player.inventory.push(potion1);
-        player.inventory.push(potion2);
-        player.inventory.push(potion3);
-        player.inventory.push(potion4);
+        kalimat.Display();
+
+        Utils.clearScreen();
+        Display.displayBanner();
+
+        System.out.println("=====================================================================================");
+        System.out.println("       NPC MEMBERIKANMU 3 RAMUAN PENYEMBUH LANGKA");
+        System.out.println("=====================================================================================");
+
+        System.out.print("Anda menerima tiga 'Heal Potion' langka...");
+        input.nextLine();
+        System.out.print("Gunakan ramuan ini untuk memulihkan kekuatanmu di tengah pertarungan.");
+        input.nextLine();
+
+        player.inventory.push(aetherBloom);
+        Utils.timeoutInSecond(1);
+        player.inventory.push(elixirVitalis);
+        Utils.timeoutInSecond(1);
+        player.inventory.push(draughtOfLife);
     }
 
-    public void addKalimat(String kalimat){
-        NodeKalimat newNode = new NodeKalimat(kalimat);
-        if(first == null){
-            first = newNode;
-        }else{
-            NodeKalimat current = first;
-            while(current.next != null){
-                current = current.next;
-            }
-            current.next = newNode;
-            newNode.back = current;
-        }
-    }
-    
-    private static void Banner() {
-        String banner = "    _                      _ _                \n" +
-                "   / \\   _ __ ___ __ _  __| (_) __ _          \n" +
-                "  / _ \\ | '__/ __/ _` |/ _` | |/ _` |         \n" +
-                " / ___ \\| | | (_| (_| | (_| | | (_| |         \n" +
-                "/_/ _ \\_\\_|  \\___\\__,_|\\__,_|_|\\__,_|         \n" +
-                "       / \\   ___  ___ ___ _ __  ___(_) ___  _ __  \n" +
-                "      / _ \\ / __|/ __/ _ \\ '_ \\/ __| |/ _ \\| '_ \\ \n" +
-                "     / ___ \\\\__ \\ (_|  __/ | | \\__ \\ | (_) | | | |\n" +
-                "    /_/   \\_\\___/\\___\\___|_| |_|___/_|\\___/|_| |_|\n";
-        System.out.println(banner);
-    }
+
 }

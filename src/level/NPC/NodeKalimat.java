@@ -8,4 +8,6 @@ public class NodeKalimat {
         this.kalimat = kalimat;
         next = back =null;
     }
+
+    
 }

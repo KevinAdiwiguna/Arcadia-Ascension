@@ -2,21 +2,21 @@ package level.level1;
 
 public class LinkedListLevel1 {
 
-    NodeMemoryGame head;
+    NodeLevel1 head;
 
     private int createRandomInt() {
         return (int) (Math.random() * 10);  
     }
 
     public void add(int value) {
-        NodeMemoryGame newNode = new NodeMemoryGame(value);
+        NodeLevel1 newNode = new NodeLevel1(value);
 
         if (head == null) {
             head = newNode;
             return;
         }
 
-        NodeMemoryGame temp = head;
+        NodeLevel1 temp = head;
         while (temp.next != null) {
             temp = temp.next;
         }
@@ -30,7 +30,7 @@ public class LinkedListLevel1 {
     }
 
     public void show() {
-        NodeMemoryGame temp = head;
+        NodeLevel1 temp = head;
         while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
@@ -39,7 +39,7 @@ public class LinkedListLevel1 {
     }
 
     public boolean equalsList(int[] arr) {
-        NodeMemoryGame temp = head;
+        NodeLevel1 temp = head;
         int i = 0;
 
         while (temp != null && i < arr.length) {

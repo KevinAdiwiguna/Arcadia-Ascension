@@ -1,4 +1,5 @@
 package level.level2;
+
 class Monster {
     Monster next;
     String nama;

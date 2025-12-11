@@ -15,7 +15,7 @@ public class QueueLevel2 {
             front = newMonster;
             rear = newMonster;
             return;
-        } 
+        }
         rear.next = newMonster;
         rear = newMonster;
     }

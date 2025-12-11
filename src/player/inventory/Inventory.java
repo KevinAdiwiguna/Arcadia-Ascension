@@ -1,53 +1,47 @@
-
 package player.inventory;
 
-import java.util.Stack;
-
 import player.PlayerNode;
+import utils.Utils;
 
 public class Inventory {
-    public InventoryNode top;
-    private int size;
-    private PlayerNode owner;
+    private InventoryNode top;
+    int size;
 
     public Inventory() {
         top = null;
         size = 0;
-        owner = null;
     }
 
-    public Inventory(PlayerNode owner) {
-        this();
-        this.owner = owner;
-    }
-
-    public void setOwner(PlayerNode owner) { this.owner = owner; }
-
+    // Push node ke stack
     public void push(InventoryNode node) {
         node.next = top;
         top = node;
         size++;
-        System.out.println(node.name + " ditambahkan ke inventory.");
+
+        System.out.println("\n╔════════════════════════════════════════════╗");
+        System.out.println("║ Potion " + node.name + " ditambahkan! ");
+        System.out.println("║ Heal Amount : " + node.healAmount);
+        System.out.println("╚════════════════════════════════════════════╝");
     }
 
+    // Pop node dari stack
     public InventoryNode pop() {
         if (isEmpty()) {
-            System.out.println("Inventory kosong!");
+            System.out.println("\n╔════════════════════════════════════════╗");
+            System.out.println("║  Inventory kosong! Tidak ada item yang bisa diambil. ║");
+            System.out.println("╚════════════════════════════════════════╝");
             return null;
         }
+
         InventoryNode removed = top;
         top = top.next;
         size--;
-        System.out.println(removed.name + " diambil dari inventory.");
-        return removed;
-    }
 
-    public InventoryNode peek() {
-        if (isEmpty()) {
-            System.out.println("Inventory kosong!");
-            return null;
-        }
-        return top;
+        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println("║ Item: " + removed.name + " diambil dari inventory");
+        System.out.println("╚════════════════════════════════════════════════════╝");
+
+        return removed;
     }
 
     public boolean isEmpty() {
@@ -58,7 +52,7 @@ public class Inventory {
         InventoryNode current = top;
         System.out.println("Isi Inventory:");
         while (current != null) {
-            System.out.print("- " + current.name);
+            System.out.print("- " + current.name + " (posisi: " + current.position + ")");
             if (current.healAmount > 0)
                 System.out.println(", heal: " + current.healAmount);
             else if (current.damage > 0)
@@ -69,7 +63,66 @@ public class Inventory {
         }
     }
 
-    public int hitungTotalInventory(){
+    public boolean SearchPotion(String namaPotion) {
+        InventoryNode current = top;
+        while (current != null) {
+            if (current.name != null && current.name.equalsIgnoreCase(namaPotion)) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    public void UsePotion(String namaPotion, PlayerNode player) {
+        if (isEmpty()) {
+            System.out.println("\n╔════════════════════════════════════╗");
+            System.out.println("║ Inventory kosong! Tidak ada potion yang bisa digunakan. ║");
+            System.out.println("╚════════════════════════════════════╝");
+            return;
+        }
+
+        InventoryNode tempStack = null;
+
+        while (top != null && (top.name == null || !top.name.equalsIgnoreCase(namaPotion))) {
+            InventoryNode moved = pop();
+            moved.next = tempStack;
+            tempStack = moved;
+        }
+
+        if (top == null) {
+            System.out.println("\n╔════════════════════════════════════╗");
+            System.out.println("║ Potion '" + namaPotion + "' tidak ditemukan dalam inventory! ║");
+            System.out.println("╚════════════════════════════════════╝");
+
+            while (tempStack != null) {
+                InventoryNode node = tempStack;
+                tempStack = tempStack.next;
+                push(node);
+            }
+            return;
+        }
+
+        InventoryNode found = pop();
+        if (found != null && player != null) {
+            player.Heal(found.healAmount);
+
+            System.out.println("\n╔════════════════════════════════════════════╗");
+            System.out.println("║ Potion '" + found.name + "' digunakan! ✨");
+            System.out.println("║ " + player.getPlayerName() + " sembuh sebanyak " + found.healAmount + " HP!");
+            System.out.println("╚════════════════════════════════════════════╝");
+
+            Utils.loadingAnimation(20, 100);
+        }
+
+        while (tempStack != null) {
+            InventoryNode node = tempStack;
+            tempStack = tempStack.next;
+            push(node);
+        }
+    }
+
+    public int hitungTotalInventory() {
         InventoryNode current = top;
         int count = 0;
         while (current != null) {
@@ -78,70 +131,5 @@ public class Inventory {
         }
 
         return count;
-    }
-
-    public boolean SearchPotion(String namaPotion){
-        InventoryNode current = top;
-        
-        while (current != null) {
-            if(current.name != null && current.name.equalsIgnoreCase(namaPotion)){
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
-    }
-
-    public void UsePotion(String namaPotion){
-        
-
-        if (isEmpty()){
-            System.out.println("Inventory kosong!");
-            return;
-        }
-
-        Stack<InventoryNode> temp = new Stack<>();
-
-        // Pindahkan item teratas ke stack sementara sampai menemukan potion yang dicari
-        while (top != null && (top.name == null || !top.name.equalsIgnoreCase(namaPotion))) {
-            InventoryNode moved = pop();
-            if (moved != null) temp.push(moved);
-        }
-
-        // Jika sudah habis dan tidak ditemukan
-        if (top == null) {
-            System.out.println("Potion '" + namaPotion + "' tidak ditemukan dalam inventory.");
-            // Kembalikan semua item dari stack sementara ke inventory
-            while (!temp.isEmpty()) {
-                push(temp.pop());
-            }
-            return;
-        }
-
-        // Top sekarang adalah potion yang dicari
-        InventoryNode found = pop();
-        if (found != null) {
-            if (found.healAmount > 0) {
-                if (owner != null) {
-                    owner.Heal(found.healAmount);
-                    System.out.println(owner.getPlayerName() + " healed " + found.healAmount + " HP oleh " + found.name + ".");
-                } else {
-                    System.out.println("Menggunakan potion " + found.name + ", heal " + found.healAmount + " HP! (tidak ada owner untuk di-heal)");
-                }
-            } else {
-                System.out.println("Potion '" + namaPotion + "' tidak memiliki efek heal.");
-            }
-            System.out.println("Potion '" + namaPotion + "' digunakan dan dihapus dari inventory.");
-        }
-
-        while (!temp.isEmpty()) {
-            push(temp.pop());
-        }
-    }
-
-
-    // Ukuran stack
-    public int getSize() {
-        return size;
     }
 }

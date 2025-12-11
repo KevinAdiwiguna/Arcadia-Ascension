@@ -1,9 +1,9 @@
 package level.level4;
-
 import java.util.Scanner;
 import player.PlayerNode;
 
 public class Level4 {
+
     PlayerNode player;
     Scanner input = new Scanner(System.in);
 
@@ -14,10 +14,13 @@ public class Level4 {
     public void start() {
         Scanner sc = new Scanner(System.in);
         int[] password = { 4, 9, 2, 7, 5 };
-        int attempts = 2;
 
-        while (attempts > 0) {
-            System.out.println("===== LEVEL 4: Tebak Password 5 Digit =====");
+        while (player.getCurrentHp() > 0) {
+            System.out
+                    .println("\n=====================================================================================");
+            System.out
+                    .println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
+            System.out.println("=====================================================================================");
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];
@@ -25,17 +28,20 @@ public class Level4 {
                 guess[i] = sc.nextInt();
             }
 
+            // --- Sorting untuk keperluan belajar ---
             int[] passSorted = copy(password);
             int[] guessSorted = copy(guess);
             bubbleSort(passSorted);
             bubbleSort(guessSorted);
 
+            // --- Searching posisi benar (O) & frekuensi untuk Y ---
             int[] freq = new int[10];
             for (int p : password)
                 freq[p]++;
 
-            char[] symbol = new char[5];
+            char[] symbol = new char[5]; // simbol O/Y/X
 
+            // Cek posisi benar (O)
             for (int i = 0; i < 5; i++) {
                 if (guess[i] == password[i]) {
                     symbol[i] = 'O';
@@ -43,6 +49,7 @@ public class Level4 {
                 }
             }
 
+            // Cek angka ada tapi posisi salah (Y) / X
             for (int i = 0; i < 5; i++) {
                 if (symbol[i] != 'O') {
                     if (freq[guess[i]] > 0) {
@@ -54,6 +61,7 @@ public class Level4 {
                 }
             }
 
+            // Tampilkan tebakan & simbol
             System.out.println();
             System.out
                     .println("X=JAWABAN SALAH\n" + "Y=JAWABAN BENAR POSISI SALAH\n" + "o=JAWABAN BENAR POSISI BENAR\n");
@@ -77,18 +85,25 @@ public class Level4 {
             if (semuaBenar) {
                 System.out.println("Password benar! Pintu terbuka!");
                 System.out.println("Lanjut ke level berikutnya");
+
+                delay(25, 150);
+
                 return;
             }
 
-            attempts--;
-            System.out.println("Sisa percobaan: " + attempts + "\n");
-            System.out.println("HP: " + player.getCurrentHp());
-            player.getDamage(10);
+            player.getDamage(25);
+
+            System.out.println("Password salah! Coba lagi.");
+            System.out.println("Anda menerima damage dari kegagalan ini....");
+            System.out.println("Health anda sekarang: " + player.getCurrentHp());
+            delay(25, 100);
         }
 
         System.out.println("Kesempatan habis. Pintu tetap terkunci.");
+        delay(25, 100);
     }
 
+    // --- Bubble Sort ---
     private void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
@@ -101,10 +116,21 @@ public class Level4 {
         }
     }
 
+    // --- Copy array sederhana ---
     private int[] copy(int[] arr) {
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++)
             result[i] = arr[i];
         return result;
+    }
+
+    static void delay(int length, int ms) {
+        for (int i = 0; i < length; i++) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) {
+            }
+            System.out.print(". ");
+        }
     }
 }

@@ -70,8 +70,8 @@ public class ArcadiaAscension {
         // level2.start();
         // Level3 level3 = new Level3(player);
         // level3.start();
-        // Level4 level4 = new Level4(player);
-        // level4.start();
+        Level4 level4 = new Level4(player);
+        level4.start();
         // LevelNPC npc = new LevelNPC(player);
         // npc.Start();
         LevelBoss levelBoss = new LevelBoss(player);

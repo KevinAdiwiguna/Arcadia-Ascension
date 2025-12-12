@@ -20,27 +20,6 @@ public class Utils {
         }
     }
 
-    public static void loadingAnimation() {
-        for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(250);
-            } catch (Exception e) {
-            }
-            System.out.print(".");
-        }
-    }
-
-    public static void loadingAnimation(int data, int milisecond) {
-        try {
-            for (int i = 0; i < data; i++) {
-                System.out.print(".");
-                Thread.sleep(milisecond);
-            }
-            System.out.println();
-        } catch (InterruptedException e) {
-        }
-    }
-
     public static void showDamage(int damage, PlayerNode player) {
         int newHp = player.getCurrentHp() - damage;
         System.out.println("\n╔══════════════════════════════════════╗");
@@ -50,10 +29,25 @@ public class Utils {
         System.out.println("╚══════════════════════════════════════╝");
     }
 
+    public static void loadingAnimation(int data, int milisecond) {
+        for (int i = 0; i < data; i++) {
+
+            System.out.print(".");
+
+            long start = System.currentTimeMillis();
+            long end = start + milisecond;
+
+            while (System.currentTimeMillis() < end) {
+            }
+        }
+        System.out.println();
+    }
+
     public static void timeoutInSecond(int second) {
-        try {
-            Thread.sleep(second * 1000);
-        } catch (Exception e) {
+        long start = System.currentTimeMillis();
+        long end = start + (second * 1000);
+
+        while (System.currentTimeMillis() < end) {
         }
     }
 

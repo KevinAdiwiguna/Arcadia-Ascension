@@ -24,9 +24,9 @@ public class LevelBoss {
         System.out.println("\t\t\t" + boss.nama);
         System.out.println("##=============================================================##");
 
-        delay(25, 10);
+        Utils.loadingAnimation(25, 10);
         System.out.println("\nBerhati-hatilah");
-        delay(25, 10);
+        Utils.loadingAnimation(25, 10);
         while (player.getCurrentHp() > 0 && boss.getCurrentHp() > 0) {
             Utils.clearScreen();
 
@@ -47,7 +47,7 @@ public class LevelBoss {
                     boss.takeDamage(player.attack());
                     System.out.println("Boss marah dan menyerang anda lagi...");
                     player.getDamage(boss.getAttackPower());
-                    delay(10, 150);
+                    Utils.loadingAnimation(10, 150);
                     break;
                 case 2:
                     player.inventory.printInventory();
@@ -70,17 +70,7 @@ public class LevelBoss {
                     "\n" + player.getPlayerName() + ", Kesempatan kamu habis.....\n Kamu Kalah.............\n");
         }
 
-        delay(25, 150);
+        Utils.loadingAnimation(25, 150);
 
-    }
-
-    static void delay(int length, int ms) {
-        for (int i = 0; i < length; i++) {
-            try {
-                Thread.sleep(ms);
-            } catch (Exception e) {
-            }
-            System.out.print(". ");
-        }
     }
 }

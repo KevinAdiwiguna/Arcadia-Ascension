@@ -69,8 +69,16 @@ public class Level1 {
             System.out.println("Masukkan kembali angka sebanyak " + TOTAL_NUMBERS + ":\n");
 
             for (int i = 0; i < TOTAL_NUMBERS; i++) {
-                System.out.print("Angka ke-" + (i + 1) + ": ");
-                userInput[i] = scanner.nextInt();
+                while (true) {
+                    System.out.print("Angka ke-" + (i + 1) + ": ");
+                    try {
+                        userInput[i] = scanner.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Pilihan tidak valid. Tolong masukkan sebuah angka.");
+                        scanner.nextLine();
+                    }
+                }
             }
 
             if (list.equalsList(userInput)) {

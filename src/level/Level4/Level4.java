@@ -1,4 +1,5 @@
-package level.level4;
+package level.Level4;
+
 import java.util.Scanner;
 import player.PlayerNode;
 
@@ -24,8 +25,13 @@ public class Level4 {
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];
-            for (int i = 0; i < 5; i++) {
-                guess[i] = sc.nextInt();
+            try {
+                for (int i = 0; i < 5; i++) {
+                    guess[i] = sc.nextInt();
+                }
+            } catch (Exception e) {
+                System.out.println("Pilihan tidak valid. Tolong masukkan sebuah angka.");
+                input.nextLine();
             }
 
             // --- Sorting untuk keperluan belajar ---

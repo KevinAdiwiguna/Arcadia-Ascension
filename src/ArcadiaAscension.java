@@ -7,8 +7,8 @@ import utils.Display;
 import level.Map.Graph;
 import level.level1.Level1;
 import level.level2.Level2;
-import level.level3.Level3;
-import level.level4.Level4;
+import level.Level3.Level3;
+import level.Level4.Level4;
 import level.NPC.LevelNPC;
 import level.BossLevel.LevelBoss;
 
@@ -45,7 +45,34 @@ public class ArcadiaAscension {
 
         graph.addEdge(6, 7, 2);
 
-        mainMenu(input);
+        PlayerNode player = new PlayerNode("kevin", 150, 75);
+
+        // Level1 level1 = new Level1(player);
+        // level1.start();
+        // graph.markVisited(1);
+
+        // Level3 level3 = new Level3(player);
+        // level3.start();
+        // graph.markVisited(3);
+
+        // Level2 level2 = new Level2(player);
+        // level2.start();
+        // graph.markVisited(2);
+
+        // Level4 level4 = new Level4(player);
+        // level4.start();
+        // graph.markVisited(4);
+
+        // level.LevelCheck.LevelCheckSistem lcs = new
+        // level.LevelCheck.LevelCheckSistem(graph);
+        // lcs.Start();
+        // graph.markVisited(6);
+
+        LevelBoss bossLevel = new LevelBoss(player);
+        bossLevel.start();
+        graph.markVisited(7);
+
+        // mainMenu(input);
     }
 
     static void mainMenu(Scanner input) {
@@ -142,14 +169,14 @@ public class ArcadiaAscension {
         kalimat.addKalimat("Sosok Berjubah : \"Perjalananmu tidak akan mudah, petualang...\"");
         kalimat.addKalimat("Sosok Berjubah : \"Namun aku akan memberimu panduan agar kau tidak tersesat.\"");
         kalimat.addKalimat("Sosok itu mengeluarkan sehelai gulungan tua dari balik jubahnya.\n" +
-                        "Kau dapat melihat simbol-simbol kuno terukir samar di permukaannya...");
+                "Kau dapat melihat simbol-simbol kuno terukir samar di permukaannya...");
         kalimat.addKalimat("Sosok Berjubah : \"Ambillah. Ini adalah peta wilayah Arcadia.\"");
         kalimat.addKalimat("Sosok Berjubah : \"Pahami rutenya... dan jangan biarkan kegelapan mengejarmu.\"");
         kalimat.addKalimat("Saat gulungan itu berada di tanganmu, ia langsung membuka sendiri,\n" +
-                        "menampilkan jalur, node, dan lokasi penuh misteri di hadapanmu...");
-        
+                "menampilkan jalur, node, dan lokasi penuh misteri di hadapanmu...");
+
         kalimat.Display();
-        
+
         utils.Utils.loadingAnimation(25, 100);
 
         // ===========================================================================================
@@ -172,18 +199,19 @@ public class ArcadiaAscension {
                 System.out.println("ID tujuan tidak valid.");
             } else if (!graph.isValidDestination(currentName, destName)) {
                 System.out.println("Tujuan tidak terhubung dari lokasi saat ini.");
-            }else {
-                if(graph.isVisited(destId) == true){
+            } else {
+                if (graph.isVisited(destId) == true) {
                     graph.setPlayerLocation(destId);
                     System.out.println(player.getPlayerName() + ": \"Sepertinya kita pernah melewati tempat ini\"");
-                }else{
+                } else {
                     graph.setPlayerLocation(destId);
                     runLevel(destId, player);
                 }
             }
-            
+
             utils.Utils.loadingAnimation(25, 200);
-            if(destId == 6) runLevel(destId, player); //DEBUNGGING AJA INI NANTI HAPUS
+            if (destId == 6)
+                runLevel(destId, player); // DEBUNGGING AJA INI NANTI HAPUS
 
         }
 

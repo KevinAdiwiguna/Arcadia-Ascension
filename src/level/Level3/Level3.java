@@ -1,4 +1,4 @@
-package level.level3;
+package level.Level3;
 
 import java.util.Scanner;
 import utils.Utils;
@@ -45,8 +45,8 @@ public class Level3 {
             System.out.println("=====================================================================================");
             System.out.println("-----------------------   LEVEL 3 - KUIL ARTEFAK TERBALIK   -------------------------");
             System.out.println("Kamu memasuki Kuil Artefak Terbalik.\n" +
-                                "Di depanmu ada tumpukan artefak yang harus disusun kembali dengan benar.\n" +
-                                "Hati-hati, setiap kesalahan akan mengurangi HP-mu.");
+                    "Di depanmu ada tumpukan artefak yang harus disusun kembali dengan benar.\n" +
+                    "Hati-hati, setiap kesalahan akan mengurangi HP-mu.");
             System.out.println("=====================================================================================");
 
             System.out.println("Tumpukan Artefak Saat Ini:");
@@ -61,7 +61,6 @@ public class Level3 {
             System.out.println("\n1. Ambil Artefak (POP)");
             System.out.println("2. Letakkan ke Peti Suci (PUSH)");
             System.out.println("3. Lihat Semua");
-            System.out.println("4. Keluar");
             System.out.print("Pilihan: ");
 
             String choice = scanner.nextLine().trim();
@@ -110,13 +109,17 @@ public class Level3 {
                     Peti.printStack();
                     showHand(playerHand);
 
-
                     if (correctStack.isEmpty()) {
-                        System.out.println("=====================================================================================");
-                        System.out.println("-------------------------------   NICEE KAMU BERHASIL   -----------------------------");
-                        System.out.println("=====================================================================================");
-                        System.out.println("Cahaya suci memancar dari Peti Suci… seluruh artefak akhirnya tersusun dengan benar.\n" +
-                                            "Kekuatan kuno mengalir ke tubuhmu, memulihkan sebagian energi yang hilang.");
+                        System.out.println(
+                                "=====================================================================================");
+                        System.out.println(
+                                "-------------------------------   NICEE KAMU BERHASIL   -----------------------------");
+                        System.out.println(
+                                "=====================================================================================");
+                        System.out.println(
+                                "Cahaya suci memancar dari Peti Suci… seluruh artefak akhirnya tersusun dengan benar.\n"
+                                        +
+                                        "Kekuatan kuno mengalir ke tubuhmu, memulihkan sebagian energi yang hilang.");
                         player.levelUp();
                         player.getInventory().push(new InventoryNode("Heal Potion", 100));
                         System.out.println("HP kamu saat ini : " + player.getCurrentHp());
@@ -125,7 +128,7 @@ public class Level3 {
 
                     System.out.println("Enter...");
                     scanner.nextLine();
-                break;
+                    break;
 
                 case "3":
                     System.out.println("--- Tumpukan Artefak ---");

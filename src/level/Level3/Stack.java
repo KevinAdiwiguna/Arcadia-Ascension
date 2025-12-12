@@ -1,13 +1,7 @@
-package level.level3;
+package level.Level3;
 
 public class Stack {
     private Node top;
-
-    private static class Node {
-        String data;
-        Node next;
-        Node(String d) { data = d; next = null; }
-    }
 
     public void push(String val) {
         Node n = new Node(val);
@@ -16,7 +10,8 @@ public class Stack {
     }
 
     public String pop() {
-        if (top == null) return null;
+        if (top == null)
+            return null;
         String v = top.data;
         top = top.next;
         return v;
@@ -38,18 +33,6 @@ public class Stack {
             cur = cur.next;
         }
         System.out.println();
-    }
-
-    public void printBottomToTop() {
-        System.out.print("BOTTOM -> ");
-        printBottomToTopNode(top);
-        System.out.println();
-    }
-
-    private void printBottomToTopNode(Node node) {
-        if (node == null) return;
-        printBottomToTopNode(node.next);
-        System.out.print(node.data + " | ");
     }
 
     public void printSingleLine() {

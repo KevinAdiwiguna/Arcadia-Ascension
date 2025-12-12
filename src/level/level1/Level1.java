@@ -127,7 +127,7 @@ public class Level1 {
                     return;
                 }
 
-                Utils.loadingAnimation();
+                Utils.loadingAnimation(25, 100);
                 System.out.println("\nBersiap untuk ronde berikutnya...");
                 round++;
 

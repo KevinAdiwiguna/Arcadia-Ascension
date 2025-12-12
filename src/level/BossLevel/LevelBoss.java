@@ -69,7 +69,7 @@ public class LevelBoss {
             System.out.println(
                     "\n" + player.getPlayerName() + ", Kesempatan kamu habis.....\n Kamu Kalah.............\n");
         }
-
+ // tes push
         Utils.loadingAnimation(25, 150);
 
     }

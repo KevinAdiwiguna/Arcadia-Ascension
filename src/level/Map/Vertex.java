@@ -12,11 +12,11 @@ public class Vertex {
     public Vertex(int id, String name) {
         this.id = id;
         this.name = name;
-        this.visited = false;
-        this.distance = Integer.MAX_VALUE;
-        this.adjacencyList = null;
-        this.next = null;
-        this.prev = null;
+        visited = false;
+        distance = Integer.MAX_VALUE;
+        adjacencyList = null;
+        next = null;
+        prev = null;
     }
 
     public void addEdge(int destination, int weight) {

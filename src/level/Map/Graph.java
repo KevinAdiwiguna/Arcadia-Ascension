@@ -66,10 +66,7 @@ public class Graph {
 
     // Player location helpers
     public void setPlayerLocation(int id) { this.playerLocationId = id; }
-    public void setPlayerLocationByName(String name) {
-        Vertex v = findVertexByName(name);
-        if (v != null) this.playerLocationId = v.id;
-    }
+    
     public int getPlayerLocationId() { return playerLocationId; }
     public String getPlayerLocationName() { return findById(playerLocationId); }
 
@@ -89,22 +86,6 @@ public class Graph {
         }
     }
 
-    public int getDistanceBetween(String currentLocation, String destinationName) {
-        Vertex currentVertex = findVertexByName(currentLocation);
-        if (currentVertex == null) return -1;
-        Edge edge = currentVertex.adjacencyList;
-        while (edge != null) {
-            Vertex neighbor = findVertex(edge.destination);
-            if (neighbor != null && neighbor.name.equalsIgnoreCase(destinationName)) return edge.weight;
-            edge = edge.next;
-        }
-        return -1;
-    }
-
-    public void displayCurrentLocation(String currentLocation) {
-        System.out.println("\nCurrent Location: " + currentLocation);
-    }
-
     public boolean isValidDestination(String currentLocation, String destination) {
         Vertex currentVertex = findVertexByName(currentLocation);
         if (currentVertex == null) return false;
@@ -121,10 +102,82 @@ public class Graph {
         Vertex current = head;
         while (current != null) {
             current.distance = Integer.MAX_VALUE;
-            current.visited = false;
             current.prev = null;
             current = current.next;
         }
+    }
+
+    // Dijkstra algorithm: populate distance and prev for each vertex from source
+    public void dijkstra(int sourceId) {
+        resetGraph();
+        Vertex source = findVertex(sourceId);
+        if (source == null) return;
+
+        source.distance = 0;
+
+        // Use a local set to track processed vertices so we don't modify the
+        // Vertex.visited field which represents whether the player has visited
+        // the vertex in-game.
+        java.util.Set<Integer> processed = new java.util.HashSet<>();
+
+        while (true) {
+            Vertex minVertex = null;
+            int minDist = Integer.MAX_VALUE;
+            Vertex temp = head;
+            while (temp != null) {
+                if (!processed.contains(temp.id) && temp.distance < minDist) {
+                    minDist = temp.distance;
+                    minVertex = temp;
+                }
+                temp = temp.next;
+            }
+
+            if (minVertex == null) break;
+
+            processed.add(minVertex.id);
+
+            Edge e = minVertex.adjacencyList;
+            while (e != null) {
+                Vertex neighbor = findVertex(e.destination);
+                if (neighbor != null && !processed.contains(neighbor.id)) {
+                    int newDist = minVertex.distance + e.weight;
+                    if (newDist < neighbor.distance) {
+                        neighbor.distance = newDist;
+                        neighbor.prev = minVertex;
+                    }
+                }
+                e = e.next;
+            }
+        }
+    }
+
+    // Return shortest path from sourceId to destId as an int[] of vertex ids (source...dest).
+    // Returns an empty array if no path or if vertices not found.
+    public int[] shortestPath(int sourceId, int destId) {
+        Vertex source = findVertex(sourceId);
+        Vertex dest = findVertex(destId);
+        if (source == null || dest == null) return new int[0];
+
+        dijkstra(sourceId);
+
+        if (dest.distance == Integer.MAX_VALUE) return new int[0];
+
+        // Count nodes from dest back to source via prev
+        int count = 0;
+        Vertex cur = dest;
+        while (cur != null) {
+            count++;
+            cur = cur.prev;
+        }
+
+        int[] path = new int[count];
+        cur = dest;
+        for (int i = count - 1; i >= 0; i--) {
+            path[i] = cur.id;
+            cur = cur.prev;
+        }
+
+        return path;
     }
 
     public void markVisited(int id) {

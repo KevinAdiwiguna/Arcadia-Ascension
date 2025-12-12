@@ -183,7 +183,7 @@ public class ArcadiaAscension {
             }
             
             utils.Utils.loadingAnimation(25, 200);
-            if(destId == 3) runLevel(destId, player); //DEBUNGGING AJA INI NANTI HAPUS
+            if(destId == 6) runLevel(destId, player); //DEBUNGGING AJA INI NANTI HAPUS
 
         }
 
@@ -233,7 +233,8 @@ public class ArcadiaAscension {
                 Utils.clearScreen();
                 break;
             case 6:
-                
+                level.LevelCheck.LevelCheckSistem lcs = new level.LevelCheck.LevelCheckSistem(graph);
+                lcs.Start();
                 graph.markVisited(6);
                 break;
             case 7:

@@ -144,10 +144,6 @@ public class Level3 {
                     scanner.nextLine();
                     break;
 
-                case "4":
-                    running = false;
-                    break;
-
                 default:
                     System.out.println("Pilihan tidak ada!");
                     System.out.println("Enter...");

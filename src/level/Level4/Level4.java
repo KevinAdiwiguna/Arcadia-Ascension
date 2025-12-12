@@ -19,59 +19,58 @@ public class Level4 {
         while (player.getCurrentHp() > 0) {
             System.out
                     .println("\n=====================================================================================");
-            System.out
-                    .println("-----------------------   LEVEL 4 - TEBak PASSWORD 5 DIGIT   -------------------------");
+            System.out.println("-----------------------   LEVEL 4 - TEBAK PASSWORD 5 DIGIT   ------------------------");
             System.out.println("=====================================================================================");
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];
-            try {
-                for (int i = 0; i < 5; i++) {
-                    guess[i] = sc.nextInt();
+
+            for (int i = 0; i < 5; i++) {
+                while (true) {
+                    System.out.print("Masukkan angka ke-" + (i + 1) + ": ");
+
+                    try {
+                        guess[i] = sc.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Input tidak valid, masukkan angka!");
+                        sc.nextLine();
+                    }
                 }
-            } catch (Exception e) {
-                System.out.println("Pilihan tidak valid. Tolong masukkan sebuah angka.");
-                input.nextLine();
             }
 
-            // --- Sorting untuk keperluan belajar ---
+            // --- Sorting agar bisa dipakai untuk pengecekan Y ---
             int[] passSorted = copy(password);
             int[] guessSorted = copy(guess);
             bubbleSort(passSorted);
             bubbleSort(guessSorted);
 
-            // --- Searching posisi benar (O) & frekuensi untuk Y ---
-            int[] freq = new int[10];
-            for (int p : password)
-                freq[p]++;
+            // Penampung simbol
+            char[] symbol = new char[5];
 
-            char[] symbol = new char[5]; // simbol O/Y/X
-
-            // Cek posisi benar (O)
+            // --- Cek posisi benar (O) ---
             for (int i = 0; i < 5; i++) {
                 if (guess[i] == password[i]) {
                     symbol[i] = 'O';
-                    freq[guess[i]]--;
                 }
             }
 
-            // Cek angka ada tapi posisi salah (Y) / X
+            // --- Cek Y (angka ada tapi posisi salah), berbasis sorted search ---
             for (int i = 0; i < 5; i++) {
                 if (symbol[i] != 'O') {
-                    if (freq[guess[i]] > 0) {
+                    if (contains(passSorted, guess[i])) {
                         symbol[i] = 'Y';
-                        freq[guess[i]]--;
                     } else {
                         symbol[i] = 'X';
                     }
                 }
             }
 
-            // Tampilkan tebakan & simbol
+            // Tampilkan output
             System.out.println();
-            System.out
-                    .println("X=JAWABAN SALAH\n" + "Y=JAWABAN BENAR POSISI SALAH\n" + "o=JAWABAN BENAR POSISI BENAR\n");
+            System.out.println("X = SALAH | Y = ADA TAPI POSISI SALAH | O = BENAR POSISI");
             System.out.println();
+
             for (int i = 0; i < 5; i++)
                 System.out.print(guess[i] + " ");
             System.out.println();
@@ -82,10 +81,8 @@ public class Level4 {
             // Cek semua benar
             boolean semuaBenar = true;
             for (char c : symbol) {
-                if (c != 'O') {
+                if (c != 'O')
                     semuaBenar = false;
-                    break;
-                }
             }
 
             if (semuaBenar) {
@@ -93,15 +90,11 @@ public class Level4 {
                 System.out.println("Lanjut ke level berikutnya");
 
                 delay(25, 150);
-
                 return;
             }
 
             player.getDamage(25);
-
-            System.out.println("Password salah! Coba lagi.");
-            System.out.println("Anda menerima damage dari kegagalan ini....");
-            System.out.println("Health anda sekarang: " + player.getCurrentHp());
+            System.out.println("Password salah! Anda menerima damage! HP sekarang: " + player.getCurrentHp());
             delay(25, 100);
         }
 
@@ -122,7 +115,16 @@ public class Level4 {
         }
     }
 
-    // --- Copy array sederhana ---
+    // --- Linear Search pada array terurut ---
+    private boolean contains(int[] arr, int target) {
+        for (int x : arr) {
+            if (x == target)
+                return true;
+        }
+        return false;
+    }
+
+    // --- Copy array ---
     private int[] copy(int[] arr) {
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++)
@@ -130,6 +132,7 @@ public class Level4 {
         return result;
     }
 
+    // --- Delay animasi ---
     static void delay(int length, int ms) {
         for (int i = 0; i < length; i++) {
             try {

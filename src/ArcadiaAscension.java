@@ -59,9 +59,9 @@ public class ArcadiaAscension {
         // level2.start();
         // graph.markVisited(2);
 
-        // Level4 level4 = new Level4(player);
-        // level4.start();
-        // graph.markVisited(4);
+        Level4 level4 = new Level4(player);
+        level4.start();
+        graph.markVisited(4);
 
         // level.LevelCheck.LevelCheckSistem lcs = new
         // level.LevelCheck.LevelCheckSistem(graph);

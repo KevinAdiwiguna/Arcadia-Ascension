@@ -59,20 +59,20 @@ public class ArcadiaAscension {
         // level2.start();
         // graph.markVisited(2);
 
-        Level4 level4 = new Level4(player);
-        level4.start();
-        graph.markVisited(4);
+        // Level4 level4 = new Level4(player);
+        // level4.start();
+        // graph.markVisited(4);
 
         // level.LevelCheck.LevelCheckSistem lcs = new
         // level.LevelCheck.LevelCheckSistem(graph);
         // lcs.Start();
         // graph.markVisited(6);
 
-        LevelBoss bossLevel = new LevelBoss(player);
-        bossLevel.start();
-        graph.markVisited(7);
+        // LevelBoss bossLevel = new LevelBoss(player);
+        // bossLevel.start();
+        // graph.markVisited(7);
 
-        // mainMenu(input);
+        mainMenu(input);
     }
 
     static void mainMenu(Scanner input) {

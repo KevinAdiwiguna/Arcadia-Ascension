@@ -2,7 +2,7 @@ package level.Level4;
 
 import java.util.Scanner;
 import player.PlayerNode;
-
+import utils.Utils;
 public class Level4 {
 
     PlayerNode player;
@@ -82,23 +82,18 @@ public class Level4 {
 
             if (menang) {
                 System.out.println("Password benar! Pintu terbuka!");
-                delay(25, 150);
+                Utils.loadingAnimation(25, 150);
                 return;
             }
 
             player.getDamage(25);
             System.out.println("Password salah! Kena damage! HP sekarang: " + player.getCurrentHp());
-            delay(25, 100);
+            Utils.loadingAnimation(25, 100);
         }
 
         System.out.println("Kesempatan habis. Pintu tetep kekunci.");
-        delay(25, 100);
+        Utils.loadingAnimation(25, 100);
     }
     
-    static void delay(int length, int ms) {
-        for (int i = 0; i < length; i++) {
-            try { Thread.sleep(ms); } catch (Exception e) {}
-            System.out.print(". ");
-        }
-    }
+    
 }

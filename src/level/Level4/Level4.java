@@ -17,45 +17,41 @@ public class Level4 {
         int[] password = { 4, 9, 2, 7, 5 };
 
         while (player.getCurrentHp() > 0) {
-            System.out
-                    .println("\n=====================================================================================");
+            System.out.println("\n=====================================================================================");
             System.out.println("-----------------------   LEVEL 4 - TEBAK PASSWORD 5 DIGIT   ------------------------");
             System.out.println("=====================================================================================");
+
             System.out.print("Masukkan 5 digit (pisah spasi): ");
 
             int[] guess = new int[5];
 
+            // input 5 angka sekaligus pakai spasi
             for (int i = 0; i < 5; i++) {
-                while (true) {
-                    System.out.print("Masukkan angka ke-" + (i + 1) + ": ");
-
-                    try {
-                        guess[i] = sc.nextInt();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println("Input tidak valid, masukkan angka!");
-                        sc.nextLine();
-                    }
+                try {
+                    guess[i] = sc.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Input tidak valid! Masukkan angka saja.");
+                    sc.nextLine();
+                    i--;  // ulangi input angka yang salah
                 }
             }
 
-            // --- Sorting agar bisa dipakai untuk pengecekan Y ---
+            // Copy + Sorting
             int[] passSorted = copy(password);
             int[] guessSorted = copy(guess);
             bubbleSort(passSorted);
             bubbleSort(guessSorted);
 
-            // Penampung simbol
             char[] symbol = new char[5];
 
-            // --- Cek posisi benar (O) ---
+            // Cek posisi benar
             for (int i = 0; i < 5; i++) {
                 if (guess[i] == password[i]) {
                     symbol[i] = 'O';
                 }
             }
 
-            // --- Cek Y (angka ada tapi posisi salah), berbasis sorted search ---
+            // Cek posisi salah (Y)
             for (int i = 0; i < 5; i++) {
                 if (symbol[i] != 'O') {
                     if (contains(passSorted, guess[i])) {
@@ -66,33 +62,28 @@ public class Level4 {
                 }
             }
 
-            // Tampilkan output
+            // Output
             System.out.println();
-            System.out.println("X = SALAH | Y = ADA TAPI POSISI SALAH | O = BENAR POSISI");
-            System.out.println();
+            System.out.println("X = SALAH | Y = ADA TAPI POSISI SALAH | O = BENAR POSISI\n");
 
-            for (int i = 0; i < 5; i++)
-                System.out.print(guess[i] + " ");
+            for (int n : guess) System.out.print(n + " ");
             System.out.println();
-            for (int i = 0; i < 5; i++)
-                System.out.print(symbol[i] + " ");
+            for (char s : symbol) System.out.print(s + " ");
             System.out.println("\n");
 
-            // Cek semua benar
+            // Cek menang
             boolean semuaBenar = true;
             for (char c : symbol) {
-                if (c != 'O')
-                    semuaBenar = false;
+                if (c != 'O') semuaBenar = false;
             }
 
             if (semuaBenar) {
                 System.out.println("Password benar! Pintu terbuka!");
-                System.out.println("Lanjut ke level berikutnya");
-
                 delay(25, 150);
                 return;
             }
 
+            // Salah → kena damage
             player.getDamage(25);
             System.out.println("Password salah! Anda menerima damage! HP sekarang: " + player.getCurrentHp());
             delay(25, 100);
@@ -102,7 +93,6 @@ public class Level4 {
         delay(25, 100);
     }
 
-    // --- Bubble Sort ---
     private void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
@@ -115,30 +105,22 @@ public class Level4 {
         }
     }
 
-    // --- Linear Search pada array terurut ---
     private boolean contains(int[] arr, int target) {
         for (int x : arr) {
-            if (x == target)
-                return true;
+            if (x == target) return true;
         }
         return false;
     }
 
-    // --- Copy array ---
     private int[] copy(int[] arr) {
         int[] result = new int[arr.length];
-        for (int i = 0; i < arr.length; i++)
-            result[i] = arr[i];
+        for (int i = 0; i < arr.length; i++) result[i] = arr[i];
         return result;
     }
 
-    // --- Delay animasi ---
     static void delay(int length, int ms) {
         for (int i = 0; i < length; i++) {
-            try {
-                Thread.sleep(ms);
-            } catch (Exception e) {
-            }
+            try { Thread.sleep(ms); } catch (Exception e) {}
             System.out.print(". ");
         }
     }

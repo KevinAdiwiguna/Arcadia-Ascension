@@ -21,11 +21,11 @@ public class Utils {
     }
 
     public static void showDamage(int damage, PlayerNode player) {
-        int newHp = player.getCurrentHp() - damage;
+        player.getDamage(damage);
         System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║    Kamu terkena serangan!             ║");
         System.out.println("║     Kerusakan :" + damage);
-        System.out.println("║     Sisa HP   : " + newHp);
+        System.out.println("║     Sisa HP   : " + player.getCurrentHp());
         System.out.println("╚══════════════════════════════════════╝");
     }
 

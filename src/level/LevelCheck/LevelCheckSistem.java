@@ -1,6 +1,8 @@
 package level.LevelCheck;
 
+import level.BossLevel.LevelBoss;
 import level.Map.Graph;
+import player.PlayerNode;
 import utils.Utils;
 import java.util.Scanner;
 
@@ -31,7 +33,6 @@ public class LevelCheckSistem {
         updateCompletionFromGraph();
     }
 
-    // helper to build the small list of levels we check
     private void addLevel(int levelNumber) {
         LevelNode newNode = new LevelNode(levelNumber);
         if (head == null) head = newNode;
@@ -42,7 +43,6 @@ public class LevelCheckSistem {
         }
     }
 
-    // Sync level completion flags from graph visited status
     private void updateCompletionFromGraph() {
         if (graph == null) return;
         LevelNode temp = head;
@@ -52,8 +52,7 @@ public class LevelCheckSistem {
         }
     }
 
-    // Run the level check flow: check visited levels and print shortest paths
-    private void runLevelCheck() {
+    private void runLevelCheck(PlayerNode player) {
         updateCompletionFromGraph();
 
         Scanner scanner = new Scanner(System.in);
@@ -75,6 +74,9 @@ public class LevelCheckSistem {
             System.out.println();
             System.out.print("Tekan ENTER untuk kembali...");
             try { scanner.nextLine(); } catch (Exception e) {}
+            
+            LevelBoss bossLevel = new LevelBoss(player);
+            bossLevel.start();
             return;
         }
 
@@ -116,8 +118,7 @@ public class LevelCheckSistem {
         try { scanner.nextLine(); } catch (Exception e) {}
     }
 
-    // Show a short dialog first, wait for player (ENTER), then run the check.
-    public void Start() {
+    public void Start(PlayerNode player) {
         Scanner scanner = new Scanner(System.in);
 
         Utils.clearScreen();
@@ -131,6 +132,6 @@ public class LevelCheckSistem {
         System.out.print("Tekan ENTER untuk melanjutkan...");
         scanner.nextLine();
         Utils.clearScreen();
-        runLevelCheck();
+        runLevelCheck(player);
     }
 }

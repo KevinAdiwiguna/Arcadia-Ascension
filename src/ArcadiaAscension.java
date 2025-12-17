@@ -43,8 +43,6 @@ public class ArcadiaAscension {
         graph.addEdge(4, 6, 3);
         graph.addEdge(5, 6, 9);
 
-        graph.addEdge(6, 7, 2);
-
         mainMenu(input);
     }
 
@@ -232,13 +230,7 @@ public class ArcadiaAscension {
                 break;
             case 6:
                 level.LevelCheck.LevelCheckSistem lcs = new level.LevelCheck.LevelCheckSistem(graph);
-                lcs.Start();
-                graph.markVisited(6);
-                break;
-            case 7:
-                LevelBoss bossLevel = new LevelBoss(player);
-                bossLevel.start();
-                graph.markVisited(7);
+                lcs.Start(player);
                 break;
             default:
                 System.out.println("Input anda tidak valid....");

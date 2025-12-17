@@ -4,6 +4,30 @@ public class Graph {
     Vertex head;
     private int playerLocationId = -1; // -1 = unknown / not set
 
+    private static class SimpleIntSet {
+        private int[] data;
+        private int size;
+        public SimpleIntSet() {
+            this.data = new int[16];
+            this.size = 0;
+        }
+        public boolean contains(int x) {
+            for (int i = 0; i < size; i++) {
+                if (data[i] == x) return true;
+            }
+            return false;
+        }
+        public void add(int x) {
+            if (contains(x)) return;
+            if (size == data.length) {
+                int[] newData = new int[data.length * 2];
+                for (int i = 0; i < data.length; i++) newData[i] = data[i];
+                data = newData;
+            }
+            data[size++] = x;
+        }
+    }
+
     public Graph() {
         head = null;
     }
@@ -118,7 +142,7 @@ public class Graph {
         // Use a local set to track processed vertices so we don't modify the
         // Vertex.visited field which represents whether the player has visited
         // the vertex in-game.
-        java.util.Set<Integer> processed = new java.util.HashSet<>();
+        SimpleIntSet processed = new SimpleIntSet();
 
         while (true) {
             Vertex minVertex = null;

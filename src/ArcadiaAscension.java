@@ -45,33 +45,6 @@ public class ArcadiaAscension {
 
         graph.addEdge(6, 7, 2);
 
-        PlayerNode player = new PlayerNode("kevin", 150, 75);
-
-        // Level1 level1 = new Level1(player);
-        // level1.start();
-        // graph.markVisited(1);
-
-        // Level3 level3 = new Level3(player);
-        // level3.start();
-        // graph.markVisited(3);
-
-        // Level2 level2 = new Level2(player);
-        // level2.start();
-        // graph.markVisited(2);
-
-        // Level4 level4 = new Level4(player);
-        // level4.start();
-        // graph.markVisited(4);
-
-        // level.LevelCheck.LevelCheckSistem lcs = new
-        // level.LevelCheck.LevelCheckSistem(graph);
-        // lcs.Start();
-        // graph.markVisited(6);
-
-        // LevelBoss bossLevel = new LevelBoss(player);
-        // bossLevel.start();
-        // graph.markVisited(7);
-
         mainMenu(input);
     }
 
@@ -210,9 +183,6 @@ public class ArcadiaAscension {
             }
 
             utils.Utils.loadingAnimation(25, 200);
-            if (destId == 6)
-                runLevel(destId, player); // DEBUNGGING AJA INI NANTI HAPUS
-
         }
 
         System.out.println("Sepertinya keberuntunganmu sudah habis!!!");

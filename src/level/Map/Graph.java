@@ -7,21 +7,27 @@ public class Graph {
     private static class SimpleIntSet {
         private int[] data;
         private int size;
+
         public SimpleIntSet() {
             this.data = new int[16];
             this.size = 0;
         }
+
         public boolean contains(int x) {
             for (int i = 0; i < size; i++) {
-                if (data[i] == x) return true;
+                if (data[i] == x)
+                    return true;
             }
             return false;
         }
+
         public void add(int x) {
-            if (contains(x)) return;
+            if (contains(x))
+                return;
             if (size == data.length) {
                 int[] newData = new int[data.length * 2];
-                for (int i = 0; i < data.length; i++) newData[i] = data[i];
+                for (int i = 0; i < data.length; i++)
+                    newData[i] = data[i];
                 data = newData;
             }
             data[size++] = x;
@@ -38,7 +44,8 @@ public class Graph {
             head = newVertex;
         } else {
             Vertex temp = head;
-            while (temp.next != null) temp = temp.next;
+            while (temp.next != null)
+                temp = temp.next;
             temp.next = newVertex;
         }
     }
@@ -55,7 +62,8 @@ public class Graph {
     public Vertex findVertex(int id) {
         Vertex temp = head;
         while (temp != null) {
-            if (temp.id == id) return temp;
+            if (temp.id == id)
+                return temp;
             temp = temp.next;
         }
         return null;
@@ -64,7 +72,8 @@ public class Graph {
     public Vertex findVertexByName(String name) {
         Vertex temp = head;
         while (temp != null) {
-            if (temp.name.equalsIgnoreCase(name)) return temp;
+            if (temp.name.equalsIgnoreCase(name))
+                return temp;
             temp = temp.next;
         }
         return null;
@@ -73,7 +82,8 @@ public class Graph {
     public int returnID(String name) {
         Vertex temp = head;
         while (temp != null) {
-            if (temp.name.equalsIgnoreCase(name)) return temp.id;
+            if (temp.name.equalsIgnoreCase(name))
+                return temp.id;
             temp = temp.next;
         }
         return 9999;
@@ -82,17 +92,24 @@ public class Graph {
     public String findById(int id) {
         Vertex temp = head;
         while (temp != null) {
-            if (temp.id == id) return temp.name;
+            if (temp.id == id)
+                return temp.name;
             temp = temp.next;
         }
         return " ";
     }
 
-    // Player location helpers
-    public void setPlayerLocation(int id) { this.playerLocationId = id; }
-    
-    public int getPlayerLocationId() { return playerLocationId; }
-    public String getPlayerLocationName() { return findById(playerLocationId); }
+    public void setPlayerLocation(int id) {
+        this.playerLocationId = id;
+    }
+
+    public int getPlayerLocationId() {
+        return playerLocationId;
+    }
+
+    public String getPlayerLocationName() {
+        return findById(playerLocationId);
+    }
 
     public void displayAdjacentLocations(String currentLocation) {
         Vertex currentVertex = findVertexByName(currentLocation);
@@ -104,7 +121,8 @@ public class Graph {
         while (edge != null) {
             Vertex neighbor = findVertex(edge.destination);
             if (neighbor != null) {
-                System.out.println("- Point " + neighbor.id + " (" + neighbor.name + ") (Distance: " + edge.weight + ")");
+                System.out
+                        .println("- Point " + neighbor.id + " (" + neighbor.name + ") (Distance: " + edge.weight + ")");
             }
             edge = edge.next;
         }
@@ -112,11 +130,13 @@ public class Graph {
 
     public boolean isValidDestination(String currentLocation, String destination) {
         Vertex currentVertex = findVertexByName(currentLocation);
-        if (currentVertex == null) return false;
+        if (currentVertex == null)
+            return false;
         Edge edge = currentVertex.adjacencyList;
         while (edge != null) {
             Vertex neighbor = findVertex(edge.destination);
-            if (neighbor != null && neighbor.name.equalsIgnoreCase(destination)) return true;
+            if (neighbor != null && neighbor.name.equalsIgnoreCase(destination))
+                return true;
             edge = edge.next;
         }
         return false;
@@ -131,17 +151,14 @@ public class Graph {
         }
     }
 
-    // Dijkstra algorithm: populate distance and prev for each vertex from source
     public void dijkstra(int sourceId) {
         resetGraph();
         Vertex source = findVertex(sourceId);
-        if (source == null) return;
+        if (source == null)
+            return;
 
         source.distance = 0;
 
-        // Use a local set to track processed vertices so we don't modify the
-        // Vertex.visited field which represents whether the player has visited
-        // the vertex in-game.
         SimpleIntSet processed = new SimpleIntSet();
 
         while (true) {
@@ -156,7 +173,8 @@ public class Graph {
                 temp = temp.next;
             }
 
-            if (minVertex == null) break;
+            if (minVertex == null)
+                break;
 
             processed.add(minVertex.id);
 
@@ -175,18 +193,17 @@ public class Graph {
         }
     }
 
-    // Return shortest path from sourceId to destId as an int[] of vertex ids (source...dest).
-    // Returns an empty array if no path or if vertices not found.
     public int[] shortestPath(int sourceId, int destId) {
         Vertex source = findVertex(sourceId);
         Vertex dest = findVertex(destId);
-        if (source == null || dest == null) return new int[0];
+        if (source == null || dest == null)
+            return new int[0];
 
         dijkstra(sourceId);
 
-        if (dest.distance == Integer.MAX_VALUE) return new int[0];
+        if (dest.distance == Integer.MAX_VALUE)
+            return new int[0];
 
-        // Count nodes from dest back to source via prev
         int count = 0;
         Vertex cur = dest;
         while (cur != null) {
@@ -206,7 +223,8 @@ public class Graph {
 
     public void markVisited(int id) {
         Vertex v = findVertex(id);
-        if (v != null) v.visited = true;
+        if (v != null)
+            v.visited = true;
     }
 
     public boolean isVisited(int id) {
@@ -215,8 +233,7 @@ public class Graph {
     }
 
     public void displayMap() {
-        String mapTemplate =
-                "        %s ------ %s ------------ %s\n" +
+        String mapTemplate = "        %s ------ %s ------------ %s\n" +
                 "                    |                 |\n" +
                 "                    |                 |\n" +
                 "                   %s ------------- %s\n" +
@@ -226,7 +243,8 @@ public class Graph {
                 "                    |                     \\\n" +
                 "                   %s ------------------ %s ------- %s";
 
-        String loc0 = "(0)", loc1 = "(1)", loc2 = "(2)", loc3 = "(3)", loc4 = "(4)", loc5 = "(5)", loc6 = "(6)", loc7 = "(7)";
+        String loc0 = "(0)", loc1 = "(1)", loc2 = "(2)", loc3 = "(3)", loc4 = "(4)", loc5 = "(5)", loc6 = "(6)",
+                loc7 = "(7)";
 
         for (int i = 0; i <= 7; i++) {
             Vertex v = findVertex(i);
@@ -240,14 +258,30 @@ public class Graph {
             }
 
             switch (i) {
-                case 0: loc0 = mark; break;
-                case 1: loc1 = mark; break;
-                case 2: loc2 = mark; break;
-                case 3: loc3 = mark; break;
-                case 4: loc4 = mark; break;
-                case 5: loc5 = mark; break;
-                case 6: loc6 = mark; break;
-                case 7: loc7 = mark; break;
+                case 0:
+                    loc0 = mark;
+                    break;
+                case 1:
+                    loc1 = mark;
+                    break;
+                case 2:
+                    loc2 = mark;
+                    break;
+                case 3:
+                    loc3 = mark;
+                    break;
+                case 4:
+                    loc4 = mark;
+                    break;
+                case 5:
+                    loc5 = mark;
+                    break;
+                case 6:
+                    loc6 = mark;
+                    break;
+                case 7:
+                    loc7 = mark;
+                    break;
             }
         }
 
